@@ -271,20 +271,55 @@ def est_trie_while(lst:list)->bool:
     Returns
     -------
     bool
-        True si la lsite est triee
+        True si la lsite est triee ou vide
 
     """
     res=True
-    for i in range(1,len(lst)):
-        if lst[i]<lst[i-1]:
+    i=1
+    if len(lst)>0: 
+        while lst[i]>lst[i-1]:#test element par element
+            if i<len(lst)-1:
+                i+=1
+            else:#on est arrives au bout de la liste
+                return True
+        else: #un element est superieur au suivant
             res=False
     return res
 
-ENTIERS=[1,2,3,4]
-print(ENTIERS, est_trie_for(ENTIERS))
-    
-    
+ENTIERS=[1,2,3,6]
 
+#print(ENTIERS, est_trie_while(ENTIERS))
+    
+def position_tri(lst:list,elem:int)->int:
+    """retourne la position de l'entier elem dans une liste triee, utilise une recherche dichotomique    
+
+    Parameters
+    ----------
+    lst : [int]
+        liste d'entier a explorer
+    elem : int
+        element dont on cherche la position
+
+    Returns
+    -------
+    int
+        indice de elem dans la liste
+
+    """
+    debut=0 #debut de l'intervalle de recherche
+    fin=len(lst)#fin de l'intervalle de recherche
+    pos=fin//2#initialise pos
+    while lst[pos]!=elem:
+        print(lst[pos])
+        if lst[pos]<elem:
+            debut=pos
+        else:
+            fin=pos
+        pos=(fin-debut)//2
+        print("pos: ",pos)
+    return pos
+    
+print(position_tri(ENTIERS, 6))
 
 
   
