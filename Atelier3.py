@@ -23,7 +23,58 @@ def plusoumoins(min:int,max:int):
     if(coup>10):
         print("perdu")
         
-plusoumoins(0, 10)
+#plusoumoins(0, 10)
 
 #test modif github
-        
+
+#EXERCICE 1
+
+ENTIERS=[1,2,3,4,5]
+
+def somme_indices(L):
+    somme=0
+    for i in range(len(L)):
+        somme+=L[i]
+    return somme
+
+def somme_elem(L):
+    somme=0
+    for l in L:
+        somme+=l
+    return somme
+
+def somme_while(L):
+    somme=0
+    ind=len(L)-1
+    while ind>=0:
+        somme+=L[ind]
+        ind-=1
+    return somme
+
+#print(somme_indices(ENTIERS))
+#print(somme_elem(ENTIERS)) 
+#print(somme_while(ENTIERS))       
+
+def test_exercice1 ():
+    print("TEST SOMME")
+    #test liste vide
+    print("Test liste vide : ", somme_while([]))
+    #test somme 11111
+    S=[1,10,100, 1000,10000]
+    print("Test somme 1111 : ", somme_while(S))
+    
+#test_exercice1()
+
+def moyenne(L):
+    somme=0
+    if len(L)>0:
+        for l in L:
+            somme+=l
+        somme=somme/len(L)
+    return somme
+
+ENTIERS=[]
+
+print(ENTIERS,"moyenne: ",moyenne(ENTIERS))
+
+
