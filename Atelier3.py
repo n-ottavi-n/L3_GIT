@@ -24,4 +24,6 @@ def plusoumoins(min:int,max:int):
         print("perdu")
         
 plusoumoins(0, 10)
+
+#test modif github
         
