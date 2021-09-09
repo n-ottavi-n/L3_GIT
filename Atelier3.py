@@ -71,12 +71,10 @@ def moyenne(L:list):
         L: [int]
     outputs:
         int: moyenne des valeurs de la liste/0 si liste vide"""
-    somme=0
-    if len(L)>0: #True si liste non vide
-        for l in L:
-            somme+=l
-        somme=somme/len(L)
-    return somme
+    moyenne=0
+    if len(L)>0:
+        moyenne=somme_elem(L)/len(L)
+    return moyenne
 
 ENTIERS=[]
 
@@ -168,6 +166,125 @@ def ind_max(L:list):
 
 ENTIERS=[]
 
-print(ENTIERS,"indice du max: ", ind_max(ENTIERS))
+
 
         
+#EXERCICE2
+
+def position_for(lst:list,elem:int):
+    """retourne l'indice de l'element elem dans la liste lst
+    --version for--
+    inputs:
+        lst: [int] la liste
+        elem: int element dont on cherche la position
+    outputs:
+        int: l'indice de l'element/-1 si element absent"""
+    res=-1
+    for i in range(len(lst)):
+        if lst[i]==elem:
+            res=i
+    return res
+
+def position_while(lst:list, elem:int):
+    """retourne l'indice de l'element elem dans la liste lst
+    --version while--
+    inputs:
+        lst: [int] la liste
+        elem: int element dont on cherche la position
+    outputs:
+        int: l'indice de l'element, -1 si element absent"""
+    i=0 #on commence a l'indice 0
+    if len(lst)==0: #cas liste vide
+        return -1
+    else: #cas liste non vide
+        val=lst[0]
+        while val!=elem:
+            if i<len(lst)-1:
+                    i+=1
+                    val=lst[i]
+                    print(i)
+            else: #elem non present dans la liste
+                return -1
+    return i
+
+e=10
+
+#print(ENTIERS,"position: ", position_while(ENTIERS,e))
+
+def nb_occurrences(lst:list,elem:int)->int:
+    """renvoie le nombre d'occurrences d'un entier dans une liste
+
+    Parameters
+    ----------
+    lst : [int]
+        la liste
+    elem : int
+        entier dont on cherche le nombre d'occurences
+
+    Returns
+    -------
+    int
+        nb d'occurrences de elem
+
+    """
+    somme=0
+    if len(lst)>0:
+        for e in lst:
+            if e==elem:
+                somme+=1
+    return somme
+
+e=0
+ENTIERS=[10,0,10,2,10,1]
+#print(ENTIERS,"nb_occ de {}: ".format(e), nb_occurrences(ENTIERS,e))
+
+def est_trie_for(lst:list)->bool:
+    """retourne vrai si la liste passee en parametre est triee
+    --version for--
+
+    Parameters
+    ----------
+    lst : [int]
+        liste d'entiers'
+
+    Returns
+    -------
+    bool
+        True si la lsite est triee
+
+    """
+    res=True
+    for i in range(1,len(lst)):
+        if lst[i]<lst[i-1]:
+            res=False
+    return res
+
+def est_trie_while(lst:list)->bool:
+    """retourne vrai si la liste passee en parametre est triee
+    --version while--
+
+    Parameters
+    ----------
+    lst : [int]
+        liste d'entiers'
+
+    Returns
+    -------
+    bool
+        True si la lsite est triee
+
+    """
+    res=True
+    for i in range(1,len(lst)):
+        if lst[i]<lst[i-1]:
+            res=False
+    return res
+
+ENTIERS=[1,2,3,4]
+print(ENTIERS, est_trie_for(ENTIERS))
+    
+    
+
+
+
+  
