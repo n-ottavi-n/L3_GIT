@@ -310,16 +310,46 @@ def position_tri(lst:list,elem:int)->int:
     fin=len(lst)#fin de l'intervalle de recherche
     pos=fin//2#initialise pos
     while lst[pos]!=elem:
-        print(lst[pos])
+        #print(lst[pos])
         if lst[pos]<elem:
             debut=pos
         else:
             fin=pos
         pos=(fin-debut)//2
-        print("pos: ",pos)
+        #print("pos: ",pos)
     return pos
     
-print(position_tri(ENTIERS, 6))
+#print(position_tri(ENTIERS, 1))
+
+def a_repetition(lst:list)->bool:
+    """retourne True si la liste passee en parametre comporte une ou plusieurs repetitions
+    
+
+    Parameters
+    ----------
+    lst : list
+        liste a evaluer
+
+    Returns
+    -------
+    bool
+        true si il y a une repetition 
+
+    """
+    res=False
+    lst_t=[]
+    i=0
+    while i<len(lst) and not res:
+        if lst[i] not in lst_t:
+            lst_t.append(lst[i])
+        else:
+            res=True
+        i+=1
+    return res
+
+ENTIERS=[1,2,6,3,4]
+
+print(a_repetition(ENTIERS))
 
 
   
