@@ -328,7 +328,7 @@ def a_repetition(lst:list)->bool:
     Parameters
     ----------
     lst : list
-        liste a evaluer
+        liste d'entiers a evaluer
 
     Returns
     -------
@@ -340,16 +340,54 @@ def a_repetition(lst:list)->bool:
     lst_t=[]
     i=0
     while i<len(lst) and not res:
-        if lst[i] not in lst_t:
+        if lst[i] not in lst_t: #pas de repetition
             lst_t.append(lst[i])
-        else:
+        else: #repetition
             res=True
         i+=1
     return res
 
 ENTIERS=[1,2,6,3,4]
 
-print(a_repetition(ENTIERS))
+#print(a_repetition(ENTIERS))
 
+#EXERCICE 3
+
+def separer(lst:list)->list:
+    """
+    renvoie une liste ou les nombres sont regroupes selon qu'ils sont negatifs, nuls ou positifs
+
+    Parameters
+    ----------
+    lst : list
+        liste d'entiers
+
+    Returns
+    -------
+    list
+        liste d'entiers regroupes
+
+    """
+    lst_sep=[]
+    #generation de lst_sep
+    for l in lst:
+        lst_sep.append(0)
+        #lst_sep=[0,0,0,..,0] len= len(lst)
+    ind_n=0 #indice des nb negatifs (commence au debut)
+    ind_p=len(lst)-1 #indice des nb positifs (commence a la fin)
+    for i in range(len(lst)):
+        if lst[i]<0:
+            lst_sep[ind_n]=lst[i]
+            ind_n+=1
+        elif lst[i]>0:
+            lst_sep[ind_p]=lst[i]
+            ind_p-=1
+    return lst_sep
+
+    
+LST=[-1,2,-12,0,4,0,5,-6]   
+
+print(separer(LST))
+    
 
   
