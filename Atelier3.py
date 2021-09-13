@@ -6,23 +6,23 @@ Created on Thu Sep  9 10:49:11 2021
 """
 import random
 
-def plusoumoins(min:int,max:int):
-    randomNumber=random.randint(min,max)
+def plusoumoins(mini:int,maxi:int):
+    randomNumber=random.randint(mini,maxi)
     finDuJeu=False
     coup=1
     while not(finDuJeu) and (coup<11):
         monNbr=int(input("Entrez un nombre: "))
-        if(monNbr>randomNumber):
+        if monNbr>randomNumber:
             print("trop grand")
-        elif(monNbr<randomNumber):
+        elif monNbr<randomNumber:
             print("trop petit")
         else:
             print("Tu gagnes en ",coup," coup(s)")
             finDuJeu=True
         coup+=1
-    if(coup>10):
+    if coup>10:
         print("perdu")
-        
+
 #plusoumoins(0, 10)
 
 #test modif github
@@ -56,7 +56,7 @@ def somme_elem(L:list)->int:
     """
     retourne la somme des elements d'une liste
     --version elements--
-    
+
     Parameters
     ----------
     L : list
@@ -77,7 +77,7 @@ def somme_while(L:list)->int:
     """
     retourne la somme des elements d'une liste
     --version while--
-    
+
     Parameters
     ----------
     L : list
@@ -97,8 +97,8 @@ def somme_while(L:list)->int:
     return somme
 
 #print(somme_indices(ENTIERS))
-#print(somme_elem(ENTIERS)) 
-#print(somme_while(ENTIERS))       
+#print(somme_elem(ENTIERS))
+#print(somme_while(ENTIERS))
 
 def test_exercice1 ():
     print("TEST SOMME")
@@ -107,7 +107,7 @@ def test_exercice1 ():
     #test somme 11111
     S=[1,10,100, 1000,10000]
     print("Test somme 11111 : ", somme_while(S))
-    
+
 #test_exercice1()
 
 def moyenne(L:list):
@@ -117,7 +117,7 @@ def moyenne(L:list):
     outputs:
         int: moyenne des valeurs de la liste/0 si liste vide"""
     moyenne=0
-    if len(L)>0:
+    if L !=[]:
         moyenne=somme_elem(L)/len(L)
     return moyenne
 
@@ -143,7 +143,7 @@ def nb_sup_elem(L:list,e:int):
 e=3
 #print(ENTIERS,"nb d'entiers >{}:".format(e),nb_sup_elem(ENTIERS, e))
 
-        
+
 def nb_sup_ind(L:list,e:int):
     """retourne le nombres valeurs d'une liste strictement superieures à un entier
     --version indices--
@@ -179,7 +179,7 @@ def moy_sup(L:list,e:int):
     return moyenne
 
 #print(ENTIERS,moy_sup(ENTIERS, e))
-            
+
 def val_max(L:list):
     """retourne la valeur max d'une liste d'entiers
     input:
@@ -194,11 +194,11 @@ def val_max(L:list):
     return res
 
 ENTIERS=[1,2,3,4,100,6]
-#print(ENTIERS,"max: {}".format(val_max(ENTIERS)))      
+#print(ENTIERS,"max: {}".format(val_max(ENTIERS)))
 
 def ind_max(L:list):
     """retourne l'indice de la valeur max d'une liste
-    inputs: 
+    inputs:
         L: [int]
     outputs:
         int: valeur max de L"""
@@ -213,7 +213,7 @@ ENTIERS=[]
 
 
 
-        
+
 #EXERCICE2
 
 def position_for(lst:list,elem:int):
@@ -321,7 +321,7 @@ def est_trie_while(lst:list)->bool:
     """
     res=True
     i=1
-    if len(lst)>0: 
+    if len(lst)>0:
         while lst[i]>lst[i-1]:#test element par element
             if i<len(lst)-1:
                 i+=1
@@ -334,9 +334,10 @@ def est_trie_while(lst:list)->bool:
 ENTIERS=[1,2,3,6]
 
 #print(ENTIERS, est_trie_while(ENTIERS))
-    
+
 def position_tri(lst:list,elem:int)->int:
-    """retourne la position de l'entier elem dans une liste triee, utilise une recherche dichotomique    
+    """retourne la position de l'entier elem dans une liste triee,
+    utilise une recherche dichotomique
 
     Parameters
     ----------
@@ -363,12 +364,12 @@ def position_tri(lst:list,elem:int)->int:
         pos=(fin-debut)//2
         #print("pos: ",pos)
     return pos
-    
+
 #print(position_tri(ENTIERS, 1))
 
 def a_repetition(lst:list)->bool:
     """retourne True si la liste passee en parametre comporte une ou plusieurs repetitions
-    
+
 
     Parameters
     ----------
@@ -378,7 +379,7 @@ def a_repetition(lst:list)->bool:
     Returns
     -------
     bool
-        true si il y a une repetition 
+        true si il y a une repetition
 
     """
     res=False
@@ -429,8 +430,8 @@ def separer(lst:list)->list:
             ind_p-=1
     return lst_sep
 
-    
-LST=[-1,2,-12,0,4,0,5,-6]   
+
+LST=[-1,2,-12,0,4,0,5,-6]
 
 print(separer(LST))
 
@@ -438,12 +439,12 @@ print(separer(LST))
 
 def histo(lst_f:list)->list:
     """renvoie une liste d'entiers representant l'histogramme d'une fonction
-    
+
 
     Parameters
     ----------
     lst_f : list
-        liste d'entiers definissant une fonction 
+        liste d'entiers definissant une fonction
 
     Returns
     -------
@@ -451,8 +452,3 @@ def histo(lst_f:list)->list:
         liste d'entiers representant l'histogramme de lst_f
 
     """
-    
-    
-    
-
-  
