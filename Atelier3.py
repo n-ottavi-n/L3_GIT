@@ -547,5 +547,17 @@ def est_surjective(lst_f:list)->bool:
 def est_bijective(lst_f:list)->bool:
     return est_injective(lst_f) and est_surjective(lst_f)
 
+def affiche_histo(lst_f:list):
+    lst_h=histo(lst_f)
+    MAXOCC=val_max(lst_h) #nb de lignes
+    MAXVALEUR=val_max(lst_f) #nb de colonnes
+    print("HISTOGRAMME")
+    for ligne in range(MAXOCC+2):
+        for colonne in range(MAXVALEUR):
+            print("#",end='')
+    
+    
 
+affiche_histo(lst_f1)
+    
 
