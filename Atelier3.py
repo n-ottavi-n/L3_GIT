@@ -552,12 +552,19 @@ def affiche_histo(lst_f:list):
     MAXOCC=val_max(lst_h) #nb de lignes
     MAXVALEUR=val_max(lst_f) #nb de colonnes
     print("HISTOGRAMME")
-    for ligne in range(MAXOCC+2):
-        for colonne in range(MAXVALEUR):
-            print("#",end='')
+    print(lst_f)
+    print(lst_h)
+    for ligne in range(MAXOCC):
+        print("\n")
+        for colonne in range(MAXVALEUR+1):
+            if lst_h[colonne]>=MAXOCC-ligne: #premiere ligne: MAXOCC-0, deuxieme ligne: MAXOCC-1, ...
+                print("#",end='')
+            else:
+                print(' ',end='')
     
+                
     
-
-affiche_histo(lst_f1)
+F=[1,5,5,5,9,11,11,15,15,15]
+affiche_histo(F)
     
 
