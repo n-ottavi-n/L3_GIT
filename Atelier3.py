@@ -388,6 +388,26 @@ def separer(lst:list)->list:
 LST=[-1,2,-12,0,4,0,5,-6]   
 
 print(separer(LST))
+
+#EXERCICE 4
+
+def histo(lst_f:list)->list:
+    """renvoie une liste d'entiers representant l'histogramme d'une fonction
+    
+
+    Parameters
+    ----------
+    lst_f : list
+        liste d'entiers definissant une fonction 
+
+    Returns
+    -------
+    list
+        liste d'entiers representant l'histogramme de lst_f
+
+    """
+    
+    
     
 
   
