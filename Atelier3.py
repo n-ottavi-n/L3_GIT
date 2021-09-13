@@ -554,15 +554,17 @@ def affiche_histo(lst_f:list):
     print("HISTOGRAMME")
     print(lst_f)
     for ligne in range(MAXOCC):
-        print("\n")
+        print("\n") #retourne a la ligne a chaque iteration
         for colonne in range(MAXVALEUR+1):
             if lst_h[colonne]>=MAXOCC-ligne: #premiere ligne: MAXOCC-0, deuxieme ligne: MAXOCC-1, ...
-                print("  # ",end='')
+                print("  # ",end='') 
             else:
                 print('    ',end='')
+    #affichage des |--|
     for i in range(MAXVALEUR+1):
             print('|--|',end='')
-    print("\n")
+    print("\n") #retour a la ligne
+    #affichage des valeurs de l'axe x
     for j in range(MAXVALEUR+1):
             print("  {} ".format(j),end='')
             
@@ -570,13 +572,11 @@ def affiche_histo(lst_f:list):
                 
     
 F=[1,5,5,5,9,11,11,15,15,15]
-#affiche_histo(F)
+affiche_histo(F)
 
 import matplotlib.pyplot as plt
     
 def affiche_histo_plt(lst_f:list):
-    print("HISTOGRAMME")
-    print(lst_f)
     print(plt.hist(lst_f))
 
-affiche_histo_plt(F)
+#affiche_histo_plt(F)
