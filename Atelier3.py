@@ -230,7 +230,7 @@ def position_for(lst:list,elem:int)->int:
             res=i
     return res
 
-def position_while(lst:list, elem:int)->int:
+def position_while(lst:list, elem:int)->int: ####A CORRIGER#####
     """retourne l'indice de l'element elem dans la liste lst
     --version while--
     inputs:
@@ -238,22 +238,20 @@ def position_while(lst:list, elem:int)->int:
         elem: int element dont on cherche la position
     outputs:
         int: l'indice de l'element, -1 si element absent"""
+    res=-1
     i=0 #on commence a l'indice 0
-    if len(lst)==0: #cas liste vide
-        return -1
-    else: #cas liste non vide
+    if len(lst)!=0: #cas liste non vide
         val=lst[0]
-        while val!=elem:
-            if i<len(lst)-1:
-                i+=1
-                val=lst[i]
-                print(i)
-            else: #elem non present dans la liste
-                return -1
-    return i
+        while val!=elem and i<len(lst)-1:
+            res=i
+            i+=1
+            val=lst[i]
+        else:
+            res=i
+    return res
 
-e=10
-
+e=11
+ENTIERS=[1,2,3,10,5,6,4]
 #print(ENTIERS,"position: ", position_while(ENTIERS,e))
 
 def nb_occurrences(lst:list,elem:int)->int:
@@ -433,7 +431,19 @@ def separer(lst:list)->list:
 
 LST=[-1,2,-12,0,4,0,5,-6]
 
-print(separer(LST))
+def test_separer():
+    """teste la fonction separer()"""
+    #test liste vide, res attendu: []
+    LST=[]
+    print("liste vide: ",separer(LST))
+    #test liste normal, res attendu: [-1,-12,-6,0,0,5,4,2]
+    LST=[-1,2,-12,0,4,0,5,-6]
+    print("[-1,2,-12,0,4,0,5,-6]: ",)
+    #test liste entiers positifs, res attendu: [1,2,3]
+    LST=[1,2,3]
+    print("[1,2,3]", separer(LST))
+
+#print(separer(LST))
 
 #EXERCICE 4
 
@@ -452,3 +462,4 @@ def histo(lst_f:list)->list:
         liste d'entiers representant l'histogramme de lst_f
 
     """
+    
