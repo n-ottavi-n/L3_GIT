@@ -329,9 +329,9 @@ def est_trie_while(lst:list)->bool:
 
 ENTIERS=[1,2,3]
 
-print(ENTIERS, est_trie_while(ENTIERS))
+#print(ENTIERS, est_trie_while(ENTIERS))
 
-def position_tri(lst:list,elem:int)->int:
+def position_tri(lst:list,elem:int)->int: ####PROBLEME DE DICHOTOMIE####
     """retourne la position de l'entier elem dans une liste triee,
     utilise une recherche dichotomique
 
@@ -350,17 +350,20 @@ def position_tri(lst:list,elem:int)->int:
     """
     debut=0 #debut de l'intervalle de recherche
     fin=len(lst)#fin de l'intervalle de recherche
-    pos=fin//2#initialise pos
-    while lst[pos]!=elem:
-        #print(lst[pos])
-        if lst[pos]<elem:
-            debut=pos
-        else:
-            fin=pos
-        pos=(fin-debut)//2
-        #print("pos: ",pos)
+    pos=-1#initialise pos
+    if lst:
+        pos=fin//2
+        while lst[pos]!=elem:
+            #print(lst[pos])
+            if lst[pos]<elem:
+                debut=pos
+            else:
+                fin=pos
+            pos=(fin-debut)//2
+            #print("pos: ",pos)
     return pos
 
+ENTIERS=[]
 #print(position_tri(ENTIERS, 1))
 
 def a_repetition(lst:list)->bool:
@@ -460,4 +463,89 @@ def histo(lst_f:list)->list:
         liste d'entiers representant l'histogramme de lst_f
 
     """
+    #initialisation de list_h
+    lst_h=[]
+    MAXVALEUR=val_max(lst_f)
+    for i in range(MAXVALEUR+1):
+        lst_h.append(0)
+    #creation de l'histogramme
+    for j in range(len(lst_f)): #parcours de lst_f
+        valeur=lst_f[j] #recuperation de la valeur
+        lst_h[valeur]+=1 #on increment l'entier d'indice correspondant la valeur
+    return lst_h
     
+LST=[6,5,6,8,4,2,1,5]
+    
+def est_injective(lst_f:list)->bool:
+    """
+    renvoie True si la fonction lst_f est injective, False sinon
+
+    Parameters
+    ----------
+    lst_f : list
+        liste d'entiers decrivant la fonction
+
+    Returns
+    -------
+    bool
+        True si injective, False sinon
+
+    """
+    res=True
+    lst_h=histo(lst_f)
+    termine=False
+    i=0
+    while not termine and lst_h[i]<2:
+        i+=1
+        if i==len(lst_h):
+            termine=True
+    else:
+        if not termine:
+            res=False
+    return res
+
+lst_f1=[6,5,6,7,4,2,1,5]
+lst_h1=[0,1,1,0,1,2,2,1]
+
+lst_f2=[3,0,6,7,4,2,1,5]
+lst_h2=[1,1,1,1,1,1,1,1]
+
+lst_fnull=[]
+#print(est_injective(lst_fnull))
+
+    
+def est_surjective(lst_f:list)->bool:
+    """
+    renvoie True si la fonction lst_f est injective, False sinon
+
+    Parameters
+    ----------
+    lst_f : list
+        liste d'entiers decrivant la fonction
+
+    Returns
+    -------
+    bool
+        True si injective, False sinon
+
+    """
+    res=True
+    lst_h=histo(lst_f)
+    termine=False
+    i=0
+    while not termine and lst_h[i]>0:
+        i+=1
+        if i==len(lst_h):
+            termine=True
+    else:
+        if not termine:
+            res=False
+    return res   
+
+#print(est_surjective(lst_fnull))  
+
+def est_bijective(lst_f:list)->bool:
+    return est_injective(lst_f) and est_surjective(lst_f)
+
+
+
