@@ -9,6 +9,7 @@ from Atelier3 import separer
 def test_separer():
     """teste la fonction separer()"""
     res="#####ECHEC#####"
+    
     #test liste vide
     LST=[]
     test=separer(LST)
@@ -16,7 +17,7 @@ def test_separer():
     test1=(attendu==test)
     
     print("attendu: {}\nresultat: {}".format(attendu,test))  
-    print(test1,"\n########")
+    print(test1,"\n-------")
     
     #test liste normal, 
     LST=[-1,2,-12,0,4,0,5,-6]
@@ -25,7 +26,7 @@ def test_separer():
     test2=(attendu==test)
     
     print("attendu: {} \nresultat: {}".format(attendu,test))    
-    print(test2,"\n########")
+    print(test2,"\n-------")
     
     #test liste entiers positifs, 
     LST=[1,2,3]
@@ -34,7 +35,7 @@ def test_separer():
     test3=(attendu==test)
     
     print("attendu: {}\nresultat: {}".format(attendu,test))
-    print(test3,"\n########")
+    print(test3,"\n-------")
     
     #test lsite de 0
     LST=[0,0,0,0]
@@ -43,7 +44,7 @@ def test_separer():
     test4=(attendu==test)
     
     print("attendu: {}\nresultat: {}".format(attendu,test))
-    print(test4,"\n########")
+    print(test4,"\n-------")
     
     if test1 and test2 and test2 and test4:
         res="#####SUCCES#####"
