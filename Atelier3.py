@@ -320,14 +320,14 @@ def est_trie_while(lst:list)->bool:
     res=True
     i=1
     if len(lst)>0:
-        while lst[i]>lst[i-1] and i<len(lst):#test element par element
+        while lst[i]>=lst[i-1] and i<len(lst)-1:#test element par element
             i+=1
         else: #un element est superieur au suivant ou on est arrive en fin de liste
-            if i<len(lst): #True si on est pas arrivé a la fin
+            if i<len(lst)-1: #True si on est pas arrivé jusqu'a la fin
                 res=False
     return res
 
-ENTIERS=[2,1,2,6,3]
+ENTIERS=[1,2,3]
 
 print(ENTIERS, est_trie_while(ENTIERS))
 
