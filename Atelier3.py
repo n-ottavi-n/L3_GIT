@@ -110,22 +110,22 @@ def test_exercice1 ():
 
 #test_exercice1()
 
-def moyenne(L:list):
+def moyenne(L:list)->int:
     """retourne la moyenne d'une liste
     input:
         L: [int]
     outputs:
         int: moyenne des valeurs de la liste/0 si liste vide"""
-    moyenne=0
+    moy=0
     if L !=[]:
-        moyenne=somme_elem(L)/len(L)
-    return moyenne
+        moy=somme_elem(L)/len(L)
+    return moy
 
 ENTIERS=[]
 
 #print(ENTIERS,"moyenne: ",moyenne(ENTIERS))
 
-def nb_sup_elem(L:list,e:int):
+def nb_sup_elem(L:list,e:int)->int:
     """retourne le nombres valeurs d'une liste strictement superieures a un entier
     --version elements--
     inputs:
@@ -144,8 +144,8 @@ e=3
 #print(ENTIERS,"nb d'entiers >{}:".format(e),nb_sup_elem(ENTIERS, e))
 
 
-def nb_sup_ind(L:list,e:int):
-    """retourne le nombres valeurs d'une liste strictement superieures à un entier
+def nb_sup_ind(L:list,e:int)->int:
+    """retourne le nombres de valeurs d'une liste strictement superieures à un entier
     --version indices--
     inputs:
         L: [int] liste
@@ -162,13 +162,13 @@ def nb_sup_ind(L:list,e:int):
 
 #print(ENTIERS,"nb d'entiers >{}:".format(e),nb_sup_ind(ENTIERS, e))
 
-def moy_sup(L:list,e:int):
+def moy_sup(L:list,e:int)->float:
     """renvoie la moyenne des valeurs superieures a un entier dans une liste
     inputs:
         L: [int]
         e: int: entier dont on cherche la moyenne des valeurs superieures dans la liste
     outputs:
-        int: moyenne des valeurs superieures a e"""
+        float: moyenne des valeurs superieures a e"""
     moyenne=0
     if len(L)>0:#True si liste non vide
         diviseur=nb_sup_elem(L,e)
@@ -180,7 +180,7 @@ def moy_sup(L:list,e:int):
 
 #print(ENTIERS,moy_sup(ENTIERS, e))
 
-def val_max(L:list):
+def val_max(L:list)->int:
     """retourne la valeur max d'une liste d'entiers
     input:
         L: [int]
@@ -196,7 +196,7 @@ def val_max(L:list):
 ENTIERS=[1,2,3,4,100,6]
 #print(ENTIERS,"max: {}".format(val_max(ENTIERS)))
 
-def ind_max(L:list):
+def ind_max(L:list)->int:
     """retourne l'indice de la valeur max d'une liste
     inputs:
         L: [int]
@@ -216,7 +216,7 @@ ENTIERS=[]
 
 #EXERCICE2
 
-def position_for(lst:list,elem:int):
+def position_for(lst:list,elem:int)->int:
     """retourne l'indice de l'element elem dans la liste lst
     --version for--
     inputs:
@@ -230,7 +230,7 @@ def position_for(lst:list,elem:int):
             res=i
     return res
 
-def position_while(lst:list, elem:int):
+def position_while(lst:list, elem:int)->int:
     """retourne l'indice de l'element elem dans la liste lst
     --version while--
     inputs:
@@ -245,9 +245,9 @@ def position_while(lst:list, elem:int):
         val=lst[0]
         while val!=elem:
             if i<len(lst)-1:
-                    i+=1
-                    val=lst[i]
-                    print(i)
+                i+=1
+                val=lst[i]
+                print(i)
             else: #elem non present dans la liste
                 return -1
     return i
