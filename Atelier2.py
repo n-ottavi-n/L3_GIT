@@ -14,7 +14,9 @@ from datetime import date
 
 def message_imc(imc):
     """renvoie une chaine decrivant l'imc"""
-    TAB_IMC=['denutriton ou famine','maigreur','corpulence normale','surpoids','obesite modere','obesite severe','obesite morbide']
+    TAB_IMC=['denutriton ou famine','maigreur',
+    'corpulence normale','surpoids','obesite modere',
+    'obesite severe','obesite morbide']
     if imc>40:
         etat=6
     elif imc>35:
@@ -47,17 +49,16 @@ def est_bissextile(annee):
         annee: int l'annee a tester
     outputs:
         boolean: true si l'annee est bissextile, False sinon"""
-    return (annee%4==0 and annee%100!=0) or annee%400==0 
+    return (annee%4==0 and annee%100!=0) or annee%400==0
 
 def test_est_bissextile():
     """test de la fonction est_bissextile()
     output:
         String, format: aaaa True/False"""
-    annee=2021
-    for i in range(20):
+    for annee in range(2021,2041):
         print(annee,est_bissextile(annee))
         annee+=1
-        
+
 #test_est_bissextile()
 
 #EXERCICE 3
@@ -88,7 +89,7 @@ def racine_double(a,b,delta,num):
         return(-b-sqrt(delta))/(2*a)
     else:
         return False
-    
+
 def str_equation(a,b,c):
     """affiche une equation du second degree sous forme de string"""
     #tests sur le premier terme
@@ -122,7 +123,7 @@ def str_equation(a,b,c):
     else: #cas general positif
         str3='+'+str(c)
     return str1+str2+str3+"=0"
-        
+
 
 #print(str_equation(-3, -2, 4))
 
@@ -131,7 +132,8 @@ def solution_equation(a,b,c):
     msg="solution de l'equation "+ str_equation(a, b, c)
     delta=discriminant(a,b,c)
     if delta>0:
-        res='Deux racines:\n x1: {} \n x2: {}'.format(racine_double(a, b, delta, 1),racine_double(a, b, delta, 2))        
+        res='Deux racines:\n x1: {} \n x2: {}'.format(racine_double(a, b, delta, 1),
+            racine_double(a, b, delta, 2))
     elif delta==0:
         res='Racine unique: x= {}'.format(racine_unique(a, b))
     else:
@@ -144,7 +146,6 @@ def solution_equation(a,b,c):
 def equation(a,b,c):
     """appelle solution_equation()"""
     print(solution_equation(a, b, c))
-    
 
 def test_equation():
     """test de la finction equation"""
@@ -155,44 +156,55 @@ def test_equation():
         if a!=0:
             equation(a,b,c)
             print('#########################')
-            
-#test_equation()   
+
+#test_equation()
 
 #EXERCICE4
 
-def date_est_valide(jour,mois,annee):
+def date_est_valide(jour:int,mois:int,annee:int)->bool:
+    """
+    retourne True si une date valide a ete passee en parametre
+
+    Parameters
+    ----------
+    jour : int
+    mois : int
+    annee : int
+
+    Returns
+    -------
+    bool
+        True si date est valide
+
+    """
     res=False
-    if jour>0 and jour<32 and mois>0 and mois<13 and annee>0: 
+    if jour>0 and jour<32 and mois>0 and mois<13 and annee>0:
         #test des mois
         if mois<8:#cas de janvier a juillet inclus
             if mois==2: #cas fevrier
-                    if est_bissextile(annee):
-                        if jour<30:
-                            res=True
-                    elif jour<29:
+                if est_bissextile(annee):
+                    if jour<30:
                         res=True
-                        
+                elif jour<29:
+                    res=True
             elif mois%2==0:#mois paire=30 jours (vrai jusqu'a juillet inclus)
                 if jour<31:
-                    res=True            
+                    res=True
             else: #mois impaire
                 res=True
-        
         else:#cas de aout a decembre
             if mois%2==0:#mois paires=31jours
                 res=True
-            elif jour<31: #mois impaires                
+            elif jour<31: #mois impaires
                 res=True
     return res
-  
-    
-    
-#print(date_est_valide(29,2,2021))       
+
+#print(date_est_valide(29,2,2021))
 
 def saisie_date_naissance():
     """saisie au clavier d'une date de naissance"""
     jour=int(input("jour: "))
-    mois=int(input("mois: "))    
+    mois=int(input("mois: "))
     annee=int(input("annee (aaaa):"))
     return date(annee,mois,jour)
 
@@ -201,12 +213,13 @@ def age(date_n):
     annee_n=date_n.year #annee de naissance
     mois_n=date_n.month #mois de naissance
     jour_n=date_n.day #jour de naissance
-    aujourdhui=date_n.today()#date d'aujourd'hui
     
+    aujourdhui=date_n.today()#date d'aujourd'hui
+
     annee=aujourdhui.year#annee courante
     mois=aujourdhui.month#mois courant
     jour=aujourdhui.day#jour courant
-    
+
     age=annee-annee_n
     if mois<mois_n:
         age-=1
@@ -228,7 +241,7 @@ def test_acces():
     age_1=age(date_n)
     msg="Desole vous avez {} ans, acces interdit".format(age_1)
     if est_majeur(date_n):
-        msg="Bonjour, vous avez {} ans, acces autorise".format(age_1)            
+        msg="Bonjour, vous avez {} ans, acces autorise".format(age_1)
     print(msg)
 
 #test_acces()

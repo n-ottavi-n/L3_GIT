@@ -31,19 +31,64 @@ def plusoumoins(min:int,max:int):
 
 ENTIERS=[1,2,3,4,5]
 
-def somme_indices(L:list):
+def somme_indices(L:list)->int:
+    """
+    retourne la somme des elements d'une liste
+    --version indices--
+
+    Parameters
+    ----------
+    L : list
+        liste d'entiers
+
+    Returns
+    -------
+    int
+        somme des elements
+
+    """
     somme=0
     for i in range(len(L)):
         somme+=L[i]
     return somme
 
-def somme_elem(L:list):
+def somme_elem(L:list)->int:
+    """
+    retourne la somme des elements d'une liste
+    --version elements--
+    
+    Parameters
+    ----------
+    L : list
+        liste d'entiers
+
+    Returns
+    -------
+    int
+        somme des elements
+
+    """
     somme=0
     for l in L:
         somme+=l
     return somme
 
-def somme_while(L:list):
+def somme_while(L:list)->int:
+    """
+    retourne la somme des elements d'une liste
+    --version while--
+    
+    Parameters
+    ----------
+    L : list
+        liste d'entiers
+
+    Returns
+    -------
+    int
+        somme des elements
+
+    """
     somme=0
     ind=len(L)-1
     while ind>=0:
@@ -61,7 +106,7 @@ def test_exercice1 ():
     print("Test liste vide : ", somme_while([]))
     #test somme 11111
     S=[1,10,100, 1000,10000]
-    print("Test somme 1111 : ", somme_while(S))
+    print("Test somme 11111 : ", somme_while(S))
     
 #test_exercice1()
 
