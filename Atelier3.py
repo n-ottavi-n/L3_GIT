@@ -320,18 +320,16 @@ def est_trie_while(lst:list)->bool:
     res=True
     i=1
     if len(lst)>0:
-        while lst[i]>lst[i-1]:#test element par element
-            if i<len(lst)-1:
-                i+=1
-            else:#on est arrives au bout de la liste
-                return True
-        else: #un element est superieur au suivant
-            res=False
+        while lst[i]>lst[i-1] and i<len(lst):#test element par element
+            i+=1
+        else: #un element est superieur au suivant ou on est arrive en fin de liste
+            if i<len(lst): #True si on est pas arrivé a la fin
+                res=False
     return res
 
-ENTIERS=[1,2,3,6]
+ENTIERS=[2,1,2,6,3]
 
-#print(ENTIERS, est_trie_while(ENTIERS))
+print(ENTIERS, est_trie_while(ENTIERS))
 
 def position_tri(lst:list,elem:int)->int:
     """retourne la position de l'entier elem dans une liste triee,

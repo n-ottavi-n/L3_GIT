@@ -46,7 +46,7 @@ def test_separer():
     print("attendu: {}\nresultat: {}".format(attendu,test))
     print(test4,"\n-------")
     
-    if test1 and test2 and test2 and test4:
+    if test1 and test2 and test3 and test4:
         res="#####SUCCES#####"
     print(res)
     
