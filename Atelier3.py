@@ -387,12 +387,12 @@ def a_repetition(lst:list)->bool:
     while i<len(lst) and not res:
         if lst[i] not in lst_t: #pas de repetition
             lst_t.append(lst[i])
+            i+=1
         else: #repetition
             res=True
-        i+=1
     return res
 
-ENTIERS=[1,2,6,3,4]
+ENTIERS=[1,2,6,3]
 
 #print(a_repetition(ENTIERS))
 
@@ -553,18 +553,30 @@ def affiche_histo(lst_f:list):
     MAXVALEUR=val_max(lst_f) #nb de colonnes
     print("HISTOGRAMME")
     print(lst_f)
-    print(lst_h)
     for ligne in range(MAXOCC):
         print("\n")
         for colonne in range(MAXVALEUR+1):
             if lst_h[colonne]>=MAXOCC-ligne: #premiere ligne: MAXOCC-0, deuxieme ligne: MAXOCC-1, ...
-                print("#",end='')
+                print("  # ",end='')
             else:
-                print(' ',end='')
+                print('    ',end='')
+    for i in range(MAXVALEUR+1):
+            print('|--|',end='')
+    print("\n")
+    for j in range(MAXVALEUR+1):
+            print("  {} ".format(j),end='')
+            
     
                 
     
 F=[1,5,5,5,9,11,11,15,15,15]
-affiche_histo(F)
-    
+#affiche_histo(F)
 
+import matplotlib.pyplot as plt
+    
+def affiche_histo_plt(lst_f:list):
+    print("HISTOGRAMME")
+    print(lst_f)
+    print(plt.hist(lst_f))
+
+affiche_histo_plt(F)
