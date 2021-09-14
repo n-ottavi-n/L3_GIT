@@ -8,13 +8,14 @@ from Atelier3 import separer
 
 def test_separer():
     """teste la fonction separer()"""
+    
     res="#####ECHEC#####"
     
     #test liste vide
     LST=[]
     test=separer(LST)
     attendu=[]
-    test1=(attendu==test)
+    test1=(attendu==test)#True si test reussi
     
     print("attendu: {}\nresultat: {}".format(attendu,test))  
     print(test1,"\n-------")
@@ -23,7 +24,7 @@ def test_separer():
     LST=[-1,2,-12,0,4,0,5,-6]
     test=separer(LST)
     attendu=[-1, -12, -6, 0, 0, 5, 4, 2]
-    test2=(attendu==test)
+    test2=(attendu==test)#True si test reussi
     
     print("attendu: {} \nresultat: {}".format(attendu,test))    
     print(test2,"\n-------")
@@ -32,7 +33,7 @@ def test_separer():
     LST=[1,2,3]
     test=separer(LST)
     attendu=[3,2,1]
-    test3=(attendu==test)
+    test3=(attendu==test)#True si test reussi
     
     print("attendu: {}\nresultat: {}".format(attendu,test))
     print(test3,"\n-------")
@@ -41,7 +42,7 @@ def test_separer():
     LST=[0,0,0,0]
     test=separer(LST)
     attendu=[0,0,0,0]
-    test4=(attendu==test)
+    test4=(attendu==test)#True si test reussi
     
     print("attendu: {}\nresultat: {}".format(attendu,test))
     print(test4,"\n-------")
@@ -51,7 +52,7 @@ def test_separer():
     print(res)
     
     
-test_separer()
+print(test_separer())
 '''
 from Atelier3 import est_trie_while as est_triee
 
