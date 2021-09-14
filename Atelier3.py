@@ -572,7 +572,7 @@ def affiche_histo(lst_f:list):
                 
     
 F=[1,5,5,5,9,11,11,15,15,15]
-affiche_histo(F)
+#affiche_histo(F)
 
 import matplotlib.pyplot as plt
     
@@ -580,3 +580,162 @@ def affiche_histo_plt(lst_f:list):
     print(plt.hist(lst_f))
 
 #affiche_histo_plt(F)
+
+#EXERCICE 5
+
+def test_present(present:callable)->bool:
+    """
+    teste une focntion present()
+
+    Parameters
+    ----------
+    present : callable
+        fonction qui teste a presence d'un element dans une liste'
+
+    Returns
+    -------
+    bool
+        True si tous les tests sont reussis
+
+    """
+    print("TEST PRESENT")
+    #test liste vide
+    res=True
+    mini,maxi=-1000000,1000000
+    msg="test liste vide"
+    LST=[]
+    element=random.randint(mini,maxi)
+    test=present(LST,element)
+    if test:
+        print("ECHEC: ",msg)
+        res=False
+    else:
+        print("SUCCES: ",msg)
+        
+    #tests sur 4 cas
+    msg="test "
+    LST_TESTS=[1,0,5,8,3,5,7,0,9,2]
+    
+    #test debut
+    element=LST_TESTS[0]
+    test=present(LST_TESTS,element)
+    if not test:
+        print("ECHEC: ",msg, "debut")
+        res=False
+    else:
+        print("SUCCES: ",msg, "debut")
+    
+    #test fin
+    element=LST_TESTS[-1]
+    test=present(LST_TESTS,element)
+    if not test:
+        print("ECHEC: ",msg, "fin")
+        res=False
+    else:
+        print("SUCCES: ",msg, "fin")
+        
+    #test milieu
+    element=LST_TESTS[len(LST_TESTS)//2]
+    test=present(LST_TESTS,element)
+    if not test:
+        print("ECHEC: ",msg, "milieu")
+        res=False
+    else:
+        print("SUCCES: ",msg, "milieu")
+        
+    #test absence
+    #generation d'une element absent de la liste
+    element=LST_TESTS[0]
+    while element in LST_TESTS:
+        element=random.randint(mini,maxi)
+    #element généré
+    test=present(LST_TESTS,element)
+    if test:
+        print("ECHEC: ",msg, "absence")
+        res=False
+    else:
+        print("SUCCES: ",msg, "absence")
+        
+    return res
+
+#VERSION 1
+#PROBLEME: LA FONCTION S'ARRETE SI LE PREMIER ELEMENT EST DIFFERENT DE e
+def present1 (lst, e) :
+    for i in range (0, len(lst), 1) :
+        if (lst[i] == e) :
+            return(True)
+        else :
+            return (False)
+    return (False) 
+
+#VERSION 1 CORRIGEE
+def present1_corr (lst, e) :
+    for i in range (0, len(lst)) :
+        if (lst[i] == e) :
+            return True
+    return False
+
+
+#VERSION 2
+#PROBLEMES: b EST INITIALISE A TRUE-->ERREUR SI LISTE VIDE,
+#b EST MIS A JOUR MEME SI L'ELEMENT A DEJA ETE TROUVE-->ERREUR SI L'ELEMENT N'EST PAS
+#EN FIN DE LISTE
+def present2 (lst, e) :
+    b=True
+    for i in range (0, len(lst), 1) :
+        if (lst[i] == e) :
+            b=True
+        else :
+            b=False
+    return (b)
+
+#VERSION 2 CORRIGEE
+def present2_corr (lst, e) :
+    present=False
+    for i in range (0, len(lst)) :
+        if (lst[i] == e) :
+            present=True
+    return (present)
+
+#VERSION 3
+#PROBLEMES: b EST INITIALISE A TRUE ET N'EST PAS RENVOYE,
+#LA FONCTION S'ARRETE DES LA PREMIERE COMPARAISON
+def present3 (lst, e) :
+    b=True
+    for i in range (0, len(lst), 1) : 
+        return (lst[i] == e)
+    
+#VERSION 3 CORRIGEE
+def present3_corr (lst, e) :
+    present=False
+    for i in range (0, len(lst)) : 
+        present=present or(lst[i] == e) 
+    return present
+        
+    
+#VERSION 4
+#PROBLEMES: b INITIALISE A False-->ON NE RENTRE JAMAIS DANS LA BOUCLE
+# i JAMAIS INCREMENTEE
+def present4 (lst, e) :
+    b=False
+    i=0
+    while (i<len(lst) and b) :
+        if (lst[i] == e) :
+            b=True
+    return (b)
+
+#VERSION 4 CORRIGEE
+def present4_corr (lst, e) :
+    present=False
+    i=0
+    while (i<len(lst) and not present) :
+        if (lst[i] == e) :
+            present=True
+        i+=1
+    return (present)
+
+print(test_present(present4_corr))
+    
+        
+    
+    

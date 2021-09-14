@@ -53,6 +53,11 @@ def test_separer():
     
     
 print(test_separer())
+
+#def test_separer2():
+    
+
+    
 '''
 from Atelier3 import est_trie_while as est_triee
 
@@ -133,3 +138,4 @@ def test_position_tri():
 
 test_position_tri()
 '''
+
