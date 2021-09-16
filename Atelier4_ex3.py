@@ -56,12 +56,21 @@ def outputStr(mot:str,lpos:list)->str:
     return mot_out
 
 def build_list(fileName:str)->list:
-    file=open(fileName,"r")
+    capitals=[]
+    file=open(fileName,"r",encoding=('utf8'))
     content=file.readlines()
-    print(content)
+    for line in content:
+        capital=line.split("\t")
+        capital=line.partition("(")[0]        
+        capital=capital.strip("\n0123456789")
+        capital=capital.partition("\t")[-1]
+        print(capital)
+        capitals.append(capital)
+    #print(capitals)
     file.close()
+    return capitals
 
-build_list("mots.txt")
+#build_list("mots.txt")
 
 import random
 
@@ -75,8 +84,9 @@ def runGame():
 
     """
     #liste de mots
-    MOTS=["bonjour","demain","bientot","matin","universite","pandemie","soleil","tableau",
-          "bouteille"]
+    #MOTS=["bonjour","demain","bientot","matin","universite","pandemie","soleil","tableau",
+    #      "bouteille"]
+    MOTS=build_list("mots.txt")
     #elements de la potence
     PENDU=["","|______","| / \\ ","|  T","|  O", "|----]"]
     #initialisations
@@ -115,5 +125,5 @@ def runGame():
         
     
 
-#runGame()    
+runGame()    
 
