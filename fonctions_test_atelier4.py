@@ -41,6 +41,21 @@ def test_is_mail():
         print(ERRORS[code_err])
     
 #test_is_mail()
+
+from Atelier4_ex3 import places_lettre
+
+def test_places_lettre():
+    mot=input("entrez un mot: ")
+    lettre=input("entrez une lettre: ")
+    res=places_lettre(lettre,mot)
+    print("mot: {}".format(mot))
+    print("{} present en position: ".format(lettre))
+    for indice in res:
+        print(indice)
+        
+#test_places_lettre()
+
+    
 '''
 def test_is_mail() -> bool:
     """Fonction de test de la fonction is_mail()
