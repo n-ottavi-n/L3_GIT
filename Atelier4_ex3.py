@@ -56,14 +56,28 @@ def outputStr(mot:str,lpos:list)->str:
     return mot_out
 
 def build_list(fileName:str)->list:
+    """
+    retourne une liste de mots
+
+    Parameters
+    ----------
+    fileName : str
+        fichier texte a convertir en liste
+
+    Returns
+    -------
+    list
+        liste de mots en minuscule et sans caracteres speciaux
+
+    """
     capitals=[]
     file=open(fileName,"r",encoding=('utf8'))
     content=file.readlines()
     for line in content:
-        capital=line.split("\t")
-        capital=line.partition("(")[0]        
-        capital=capital.strip("\n0123456789")
-        capital=capital.partition("\t")[-1]
+        capital=line.split("\t") #renvoie: [drapeau du pays pays, capitale]
+        capital=line.partition("(")[0]#retire les termes entre parentheses
+        capital=capital.strip("\n0123456789")#retire les nombres et les passages a la ligne
+        capital=capital.partition("\t")[-1]#recupere ce qui apparait apres les tabulations
         capitals.append(capital)
     file.close()
     return capitals
@@ -81,16 +95,30 @@ def runGame():
     None.
 
     """
-    #liste de mots
-    #MOTS=["bonjour","demain","bientot","matin","universite","pandemie","soleil","tableau",
-    #      "bouteille"]
-    MOTS=build_list("mots.txt")
+
     #elements de la potence
     PENDU=["","|______","| / \\ ","|  T","|  O", "|----]"]
     #initialisations
     ind_pendu=0 #pour affichage de la potence    
-    rd_int=random.randint(0,len(MOTS)-1)#choisit un entier aleatoire
-    mot=MOTS[rd_int].lower()#selection aleatoire du mot    
+
+    
+    #choix difficultée    
+    MOTS=build_list("mots.txt")
+    MOTS_DICT=build_dict(MOTS) #creation du dictionnaire
+    difficulte=int(input("Niveau de difficulté:\n(1.easy\n2.normal\n3.hard)"))
+    if difficulte==1:
+        mini,maxi=3,6
+    elif difficulte==2:
+        mini,maxi=7,8
+    else:
+        mini,maxi=9,30
+        
+    longueur=random.randint(mini, maxi)#init longueur
+    #boucle jusqu'a avoir une longueur presente dans le dictionnaire
+    while longueur not in MOTS_DICT.keys():
+        longueur=random.randint(mini, maxi)
+    mot=select_word(MOTS_DICT, longueur).lower()#choix du mot
+    
     lpos=[]
     
     print(outputStr(mot, lpos))#affiche "_ _ _ _ _ _"
@@ -122,8 +150,57 @@ def runGame():
     print(msg_fin)
     if not win:
         print(mot)
-        
     
+def build_dict(lst_m:list)->dict:
+    """
+    transforme une liste de mots en un dictionnaire de la forme {longueur mot: [liste de mots]}
+
+    Parameters
+    ----------
+    lst_m : list
+        liste de mots
+
+    Returns
+    -------
+    dict
+        dictionnaire {longueur mot:[liste mots]}
+
+    """        
+    mots_dict={}
+    for mot in lst_m:
+        if len(mot) not in mots_dict.keys():#si la cle n'existe pas dans le dictionnaire
+            mots_dict.update({len(mot): [mot]})
+        else:
+            mots_dict[len(mot)].append(mot.strip())
+    return mots_dict
+
+MOTS=build_list("mots.txt")
+
+
+MOTS_DICT=build_dict(MOTS)
+
+def select_word(sorted_words:dict,word_len:int)->str:
+    """
+    selectionne un mot au hasard d'une longueur donnée
+
+    Parameters
+    ----------
+    sorted_words : dict
+        dictionnaire de la forme {longueur mot: [liste mots]}
+    word_len : int
+        longueur du mot desiré
+
+    Returns
+    -------
+    str
+        mot de la bonne taille choisi au hasard
+
+    """
+    lst_mots=sorted_words[word_len] #liste de mots de taille word_len
+    randint=random.randint(0, len(lst_mots)-1) #int aleatoir entre 0 et taille liste
+    return lst_mots[randint]
+
+
 
 runGame()    
 

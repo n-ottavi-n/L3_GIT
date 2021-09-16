@@ -417,16 +417,16 @@ def separer(lst:list)->list:
     #generation de lst_sep
     for l in lst:
         lst_sep.append(0)
-        #lst_sep=[0,0,0,..,0] len= len(lst)
-    ind_n=0 #indice des nb negatifs (commence au debut)
-    ind_p=len(lst)-1 #indice des nb positifs (commence a la fin)
+    #lst_sep=[0,0,0,..,0] len= len(lst)
+    ind_neg=0 #indice des nb negatifs (commence au debut)
+    ind_pos=-1 #indice des nb positifs (commence a la fin)
     for i in range(len(lst)):
-        if lst[i]<0:
-            lst_sep[ind_n]=lst[i]
-            ind_n+=1
-        elif lst[i]>0:
-            lst_sep[ind_p]=lst[i]
-            ind_p-=1
+        if lst[i]<0:#remplissage par la gauche
+            lst_sep[ind_neg]=lst[i]
+            ind_neg+=1
+        elif lst[i]>0:#remplissage par la droite
+            lst_sep[ind_pos]=lst[i]
+            ind_pos-=1
     return lst_sep
 
 
@@ -469,9 +469,8 @@ def histo(lst_f:list)->list:
     for i in range(MAXVALEUR+1):
         lst_h.append(0)
     #creation de l'histogramme
-    for j in range(len(lst_f)): #parcours de lst_f
-        valeur=lst_f[j] #recuperation de la valeur
-        lst_h[valeur]+=1 #on increment l'entier d'indice correspondant la valeur
+    for valeur in lst_f: #parcours des valeur de lst_f
+        lst_h[valeur]+=1 #on incremente l'entier d'indice correspondant la valeur
     return lst_h
     
 LST=[6,5,6,8,4,2,1,5]
@@ -511,7 +510,7 @@ lst_f2=[3,0,6,7,4,2,1,5]
 lst_h2=[1,1,1,1,1,1,1,1]
 
 lst_fnull=[]
-#print(est_injective(lst_fnull))
+print(est_injective(lst_f2))
 
     
 def est_surjective(lst_f:list)->bool:
@@ -548,6 +547,19 @@ def est_bijective(lst_f:list)->bool:
     return est_injective(lst_f) and est_surjective(lst_f)
 
 def affiche_histo(lst_f:list):
+    """
+    affichage graphique vite fait de l'hsitogramme'
+
+    Parameters
+    ----------
+    lst_f : list
+        liste d'entiers decrivant la fonction'
+
+    Returns
+    -------
+    None.
+
+    """
     lst_h=histo(lst_f)
     MAXOCC=val_max(lst_h) #nb de lignes
     MAXVALEUR=val_max(lst_f) #nb de colonnes
@@ -734,7 +746,7 @@ def present4_corr (lst, e) :
         i+=1
     return (present)
 
-print(test_present(present4_corr))
+#print(test_present(present4_corr))
     
         
     

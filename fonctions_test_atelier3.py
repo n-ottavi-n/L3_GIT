@@ -52,7 +52,7 @@ def test_separer():
     print(res)
     
     
-print(test_separer())
+#print(test_separer())
 
 #def test_separer2():
     
