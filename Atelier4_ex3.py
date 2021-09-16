@@ -64,9 +64,7 @@ def build_list(fileName:str)->list:
         capital=line.partition("(")[0]        
         capital=capital.strip("\n0123456789")
         capital=capital.partition("\t")[-1]
-        print(capital)
         capitals.append(capital)
-    #print(capitals)
     file.close()
     return capitals
 
@@ -92,7 +90,7 @@ def runGame():
     #initialisations
     ind_pendu=0 #pour affichage de la potence    
     rd_int=random.randint(0,len(MOTS)-1)#choisit un entier aleatoire
-    mot=MOTS[rd_int]#selection aleatoire du mot    
+    mot=MOTS[rd_int].lower()#selection aleatoire du mot    
     lpos=[]
     
     print(outputStr(mot, lpos))#affiche "_ _ _ _ _ _"
@@ -111,7 +109,7 @@ def runGame():
             ind_pendu+=1 #on rajoute un element a la potence            
         lpos+=(new_lettre_pos)#mise a jour des lettres révélées
         mot_out=outputStr(mot, lpos)#mise a jour du mot avec le nouveau lpos
-        print(mot_out)
+        print(mot_out,"\n")
         #affichage du pendu
         for i in range(ind_pendu,0,-1):
             print(PENDU[i])
@@ -122,6 +120,8 @@ def runGame():
             msg_fin="gagné!"
             
     print(msg_fin)
+    if not win:
+        print(mot)
         
     
 
