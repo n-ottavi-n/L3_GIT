@@ -82,7 +82,6 @@ def build_list(fileName:str)->list:
     file.close()
     return capitals
 
-#build_list("mots.txt")
 
 import random
 
@@ -174,10 +173,6 @@ def build_dict(lst_m:list)->dict:
             mots_dict[len(mot)].append(mot.strip())
     return mots_dict
 
-MOTS=build_list("mots.txt")
-
-
-MOTS_DICT=build_dict(MOTS)
 
 def select_word(sorted_words:dict,word_len:int)->str:
     """
