@@ -63,7 +63,7 @@ def perf_sort(taille_des_listes:list,iterations:int)->tuple:
         moyenne_f1=0 #moyenne sur la fonction 1
         moyenne_f2=0 #----------------------- 2
         #genere une liste aleatoire de taille len_list -configuration1, default
-        test_list=gen_list_random_int(0,len_list)
+        test_list=gen_list_random_int(len_list)
         #conf=1
         #configuration2, liste triee
         #test_list=sorted(test_list)

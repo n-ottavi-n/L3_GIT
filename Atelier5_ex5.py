@@ -74,7 +74,7 @@ def perf_mix(taille_des_listes:list,iterations:int)->tuple:
         print("liste en cours ", len_list)
         moyenne_f1=0 #moyenne sur la fonction 1
         moyenne_f2=0 #----------------------- 2
-        test_list=gen_list_random_int(0,len_list)#genere une liste aleatoire de taille len_list
+        test_list=gen_list_random_int(len_list)#genere une liste aleatoire de taille len_list
         for iteration in range(iterations):
             #test fonction1
             start_pc = time.perf_counter()#debut horloge
@@ -139,7 +139,7 @@ def perf_extract(taille_des_listes:list,iterations:int)->tuple:
         print("liste en cours ", len_list)
         moyenne_f1=0 #moyenne sur la fonction 1
         moyenne_f2=0 #----------------------- 2
-        test_list=gen_list_random_int(0,len_list)#genere une liste aleatoire de taille len_list
+        test_list=gen_list_random_int(len_list)#genere une liste aleatoire de taille len_list
         for iteration in range(iterations):
             #test fonction1
             start_pc = time.perf_counter()#debut horloge

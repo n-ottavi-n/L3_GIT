@@ -133,7 +133,7 @@ def runGame():
         new_lettre_pos=places_lettre(lettre, mot)
         if not new_lettre_pos:#la lettre n'est pas dans le mot, +1 erreur,
             erreurs+=1
-            ind_pendu+=1 #on rajoute un element a la potence            
+            ind_pendu+=1 #on rajoute un element a la potence   
         lpos+=(new_lettre_pos)#mise a jour des lettres révélées
         mot_out=outputStr(mot, lpos)#mise a jour du mot avec le nouveau lpos
         print(mot_out,"\n")
