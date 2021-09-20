@@ -26,7 +26,7 @@ def gen_list_random_int(int_binf=0,int_bsup=9)->list:
 
     """
     lst_res=[]
-    for i in range(10):
+    for i in range(int_bsup+1):
         lst_res.append(rd.randint(int_binf,int_bsup))
     return lst_res
 
