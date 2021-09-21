@@ -76,23 +76,28 @@ def perf_mix(taille_des_listes:list,iterations:int)->tuple:
         moyenne_f2=0 #----------------------- 2
         test_list=gen_list_random_int(len_list)#genere une liste aleatoire de taille len_list
         for iteration in range(iterations):
+            
             #test fonction1
             start_pc = time.perf_counter()#debut horloge
             mix_list(test_list)#test
             end_pc = time.perf_counter()#fin horloge
             duree=end_pc-start_pc #resultat du test
             moyenne_f1+=duree
+            
             #test fonction2
             start_pc = time.perf_counter()#debut horloge
             random.shuffle(test_list)#test
             end_pc = time.perf_counter()#fin horloge
             duree=end_pc-start_pc
             moyenne_f2+=duree
+            
         moyenne_f1=moyenne_f1/iterations #calcul de la moyenne1
         lst_perf_f1.append(moyenne_f1) #ajout de la moyenne 1
         moyenne_f2=moyenne_f2/iterations
         lst_perf_f2.append(moyenne_f2)
+        
     res+=(lst_perf_f1,lst_perf_f2)#ajout des resultats dans le tuple de sortie
+    
     #matplotlib
     fig, ax = plt.subplots()
     ax.plot(taille_des_listes,lst_perf_f1, 'r*-', label='mix_list')
@@ -101,14 +106,16 @@ def perf_mix(taille_des_listes:list,iterations:int)->tuple:
      title='Fonctions identité, mix_list et shuffle')
     ax.legend(loc='upper center', shadow=True, fontsize='x-large')
     #fig.savefig("test.png")
+    plt.semilog()
     plt.show()
+    
     return res
 
 
 taille_lst=[10, 50, 100, 500, 1000]
 iterations=10
 
-#print(perf_mix(taille_lst, iterations))
+print(perf_mix(taille_lst, iterations))
 
 from Atelier5_ex4 import extract_element_list
 
@@ -173,7 +180,7 @@ def perf_extract(taille_des_listes:list,iterations:int)->tuple:
 taille_lst=[10, 50, 100, 500, 1000, 5000, 10000]
 iterations=10000
 
-print(perf_extract(taille_lst, iterations))
+#print(perf_extract(taille_lst, iterations))
      
        
             

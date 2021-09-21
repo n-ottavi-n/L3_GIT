@@ -27,12 +27,16 @@ def mix_list(list_to_mix:list)->list:
     longueur=len(list_to_mix)
     lst_res=[0]*longueur    #initialisation de lst_res
     lst_new_indice=[] #liste des cases de lst_res qui ont deja ete remplies
+    
     for indice in range(longueur):#parcours les indices de la liste d'entree
         new_indice=rd.randint(0, longueur-1)#recherche aleatoire d'un indice pour insertion dans la liste retournee
+       
         while new_indice in lst_new_indice:#on verifie que new_indice n'a pas deja ete utilise
             new_indice=rd.randint(0, longueur-1)#sinon on en genere un autre
+        
         lst_res[new_indice]=list_to_mix[indice]#l'element est place dans une case de lst_res choisie au hasard
         lst_new_indice.append(new_indice)#on ajoute new_indice a la liste pour ne pas le réutiliser
+    
     return lst_res
 
 

@@ -1,0 +1,2 @@
+module ateliers_POO {
+}
