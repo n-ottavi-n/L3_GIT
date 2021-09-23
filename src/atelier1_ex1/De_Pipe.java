@@ -2,20 +2,20 @@ package atelier1_ex1;
 
 public class De_Pipe extends De {
 	
-	private int valMin;
+	private final int VALMIN;
 	
 	public De_Pipe(int valMin, String nom, int nbFaces) {
 		super(nom,nbFaces);
 		if (valMin>=0 && valMin<=nbFaces) {
-			this.valMin=valMin;
+			this.VALMIN=valMin;
 		}
 		else {
-			this.valMin=0;
+			this.VALMIN=0;
 		}
 	}
 	
 	public int lancer(int nbLances) {
-		int maxi=valMin;		
+		int maxi=VALMIN;	//borne min	
 		for(int i=0;i<nbLances;i++) {			
 			int res=lancer();			
 			if(res>maxi) {				

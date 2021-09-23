@@ -57,14 +57,10 @@ public class De {
 	}
 	
 	public int lancer(int nbLances) {
-		int maxi=0;
-		
-		for(int i=0;i<nbLances;i++) {
-			
-			int res=lancer();
-			
-			if(res>maxi) {
-				
+		int maxi=0;		
+		for(int i=0;i<nbLances;i++) {			
+			int res=lancer();			
+			if(res>maxi) {			
 				maxi=res;
 			}
 		}

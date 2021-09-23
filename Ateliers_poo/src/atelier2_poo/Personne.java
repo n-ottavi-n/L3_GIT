@@ -1,14 +1,14 @@
 package atelier2_poo;
 
-import java.util.*;
-import atelier2_poo.Adresse;
+import java.time.LocalDate;
+
 
 public class Personne{
     private static final Adresse ADRESSE_INCONNUE = null;
     private static int nbPersonnes=0;
     private String nom;
     private String prenom;
-    private final GregorianCalendar dateNaissance;
+    private final LocalDate dateNaissance;
     private Adresse adresse=ADRESSE_INCONNUE;
 	
 	/**
@@ -18,7 +18,7 @@ public class Personne{
 	 * @param laDate la date de naissance de la personne
 	 * @param lAdresse l'adresse de la personne
 	 */
-	public Personne(String leNom,String lePrenom, GregorianCalendar laDate, Adresse lAdresse){
+	public Personne(String leNom,String lePrenom, LocalDate laDate, Adresse lAdresse){
 		nom = leNom.toUpperCase();
 		prenom=lePrenom;
 		dateNaissance=laDate;
@@ -39,7 +39,7 @@ public class Personne{
 	 * @param ville la ville ou la personne habite
 	 */
 	public Personne(String leNom,String lePrenom, int j, int m, int a, int numero, String rue, String code_postal, String ville){
-		this(leNom, lePrenom, new GregorianCalendar(a,m,j),new Adresse(numero,rue,code_postal,ville));
+		this(leNom, lePrenom, LocalDate.of(a,m,j),new Adresse(numero,rue,code_postal,ville));
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class Personne{
 	 * Accesseur
 	 * @return retourne la date de naissance	 
 	 */
-	public GregorianCalendar getDateNaissance() {
+	public LocalDate getDateNaissance() {
 		return dateNaissance;
 	}
 	/**
@@ -87,20 +87,19 @@ public class Personne{
 	 */
 	
 	public static boolean plusAgee(Personne p1, Personne p2) {
-		return p2.getDateNaissance().after(p1.getDateNaissance());
+		return p1.getDateNaissance().isAfter(p2.getDateNaissance());
 	}
 	
 	public boolean plusAgeeQue(Personne personne) {
-		return personne.getDateNaissance().after(this.dateNaissance);
+		return personne.getDateNaissance().isAfter(this.dateNaissance);
 	}
-	
-	
+		
 	public String toString(){
 		String result="\nNom : "+nom+"\n"
-		+"PrŽnom : "+prenom+"\n"+
-		"NŽ(e) le : "+dateNaissance.get(Calendar.DAY_OF_MONTH)+
-		"-"+dateNaissance.get(Calendar.MONTH)+
-		"-"+dateNaissance.get(Calendar.YEAR)+"\n"+
+		+"Prénom : "+prenom+"\n"+
+		"Né(e) le : "+dateNaissance.getYear()+
+		"-"+dateNaissance.getMonthValue()+
+		"-"+dateNaissance.getDayOfMonth()+"\n"+
 		"Adresse : "+
 		adresse.toString();
 		return result;

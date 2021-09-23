@@ -120,7 +120,7 @@ public class Adresse {
         @Override
 	public String toString() {
 		StringBuilder result=new StringBuilder();
-		if ((numero!=AUCUN_NUMERO)&&(numero!=INUTILE_NUMERO)) result.append("nÂ°").append(numero).append(",");
+		if ((numero!=AUCUN_NUMERO)&&(numero!=INUTILE_NUMERO)) result.append("n°").append(numero).append(",");
 		if ((!rue.equals(INCONNU_CHAINE))&&(!(rue.equals(INUTILE_CHAINE)))) result.append("rue ").append(rue);
 		if (!code_postal.equals(INCONNU_CHAINE)) result.append(" ").append(code_postal).append(" ");
 		else result.append(" Code postal inconnu ");
