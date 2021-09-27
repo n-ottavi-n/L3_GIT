@@ -86,10 +86,19 @@ public class Personne{
 	 * @see java.lang.Object#toString()
 	 */
 	
+	/**
+	 * @param p1
+	 * @param p2
+	 * @return true si p2 plus vieux que p1
+	 */
 	public static boolean plusAgee(Personne p1, Personne p2) {
 		return p1.getDateNaissance().isAfter(p2.getDateNaissance());
 	}
 	
+	/**
+	 * @param personne
+	 * @return true si this plus age que personne
+	 */
 	public boolean plusAgeeQue(Personne personne) {
 		return personne.getDateNaissance().isAfter(this.dateNaissance);
 	}
