@@ -22,9 +22,9 @@ public class Secretaire extends Employe {
 	 * @param managers
 	 */
 	protected Secretaire(String leNom,String lePrenom, LocalDate laDate, Adresse lAdresse, 
-			double salaire, LocalDate dateEmbauche, ArrayList<Manager> managers) {
+			double salaire, LocalDate dateEmbauche) {
 		super(leNom,lePrenom,laDate,lAdresse, salaire, dateEmbauche);
-		this.managers=managers;
+		managers=new ArrayList<Manager>(5);
 	}
 	
 	/**
@@ -38,11 +38,10 @@ public class Secretaire extends Employe {
 	 * @return null si age invalide, new secretaire sinon
 	 */
 	public static Secretaire createSecretaire(String leNom,String lePrenom, LocalDate laDate, Adresse lAdresse, 
-			double salaire, LocalDate dateEmbauche, ArrayList<Manager> managers){
+			double salaire, LocalDate dateEmbauche){
 		int age=dateEmbauche.getYear()-laDate.getYear();
 		if(age>16 && age<65) {
-			Secretaire secretaire=new Secretaire(leNom, lePrenom, dateEmbauche, lAdresse, salaire, dateEmbauche,
-				managers);
+			Secretaire secretaire=new Secretaire(leNom, lePrenom, dateEmbauche, lAdresse, salaire, dateEmbauche);
 			return secretaire;
 		}
 		else {
@@ -67,7 +66,17 @@ public class Secretaire extends Employe {
 	 * @param manager
 	 */
 	public void addManager(Manager manager) {
-		managers.add(manager);
+		managers.add(manager); //manager ajoute a la liste
+		manager.setSecretaire(this); //manager change de secretaire
+	}
+	
+	/**Met simplement a jout la lsite managers
+	 * @param manager
+	 */
+	protected void addManagerList(Manager manager) {
+		if (!managers.contains(manager)) {
+			managers.add(manager);
+		}
 	}
 	
 	/**

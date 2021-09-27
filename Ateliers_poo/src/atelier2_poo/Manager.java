@@ -16,8 +16,10 @@ public class Manager extends Employe {
 	 * @param dateEmbauche
 	 */
 	protected Manager(String leNom,String lePrenom, LocalDate laDate, Adresse lAdresse, 
-			double salaire, LocalDate dateEmbauche) {
+			double salaire, LocalDate dateEmbauche, Secretaire secretaire) {
 		super(leNom, lePrenom, laDate, lAdresse, salaire, dateEmbauche);
+		this.secretaire=secretaire;
+		secretaire.addManager(this);
 		
 	}
 	
@@ -31,10 +33,10 @@ public class Manager extends Employe {
 	 * @return  null si age invalide, new manager sinon 
 	 */
 	public static Manager createManager(String leNom,String lePrenom, LocalDate laDate, Adresse lAdresse, 
-			double salaire, LocalDate dateEmbauche){
+			double salaire, LocalDate dateEmbauche, Secretaire secretaire){
 		int age=dateEmbauche.getYear()-laDate.getYear();
 		if(age>16 && age<65) {
-			Manager manager=new Manager(leNom, lePrenom, dateEmbauche, lAdresse, salaire, dateEmbauche);
+			Manager manager=new Manager(leNom, lePrenom, dateEmbauche, lAdresse, salaire, dateEmbauche, secretaire);
 			return manager;
 		}
 		else {
@@ -54,7 +56,9 @@ public class Manager extends Employe {
 	 * @param secretaire
 	 */
 	public void setSecretaire(Secretaire secretaire) {
-		this.secretaire=secretaire;
+		this.secretaire.supManager(this);//ce manager est retire de la liste de la secretaire actuelle
+		this.secretaire=secretaire; //la secretaire actuelle est remplacee
+		secretaire.addManagerList(this);
 	}
 	
 	
