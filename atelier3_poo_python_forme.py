@@ -22,7 +22,7 @@ class Forme():
         return (self.calcSurface()>forme.calcSurface())
     
     def __str__(self):
-        return self.id_forme+" de surface: "+str(self.calcSurface())
+        return "{} de surface: {}".format(self.id_forme,self.calcSurface())
     
 
     

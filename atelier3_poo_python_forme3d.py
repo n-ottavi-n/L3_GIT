@@ -17,7 +17,8 @@ class Forme3d(Forme):
         pass
     
     def __str__(self):
-        return "Forme 3D "+super().__str__()+" et de volume: "+str(self.calcVolume())
+        return "Forme 3D {} et de volume: {}".format(super().__str__(),self.calcVolume())
+
     
 class Cylindre(Forme3d):
     

@@ -17,7 +17,7 @@ class Forme2d(Forme):
         pass
     
     def __str__(self):
-        return "Forme 2D "+super().__str__()+" et de perimetre: "+str(self.calcPerimetre())
+        return "Forme 2D {} et de perimetre: {}".format(super().__str__(),self.calcPerimetre())
 
 class Rectangle(Forme2d):
     
