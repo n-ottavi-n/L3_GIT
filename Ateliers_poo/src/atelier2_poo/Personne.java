@@ -5,11 +5,14 @@ import java.time.LocalDate;
 
 public class Personne{
     private static final Adresse ADRESSE_INCONNUE = null;
+    private static final int AGE_MAJORITE=18;
     private static int nbPersonnes=0;
+    private static String nomDernierePersonneCree;
     private String nom;
     private String prenom;
     private final LocalDate dateNaissance;
     private Adresse adresse=ADRESSE_INCONNUE;
+    private int ageObtentionDernierDiplome;
 	
 	/**
 	 * Constructeur de Personne
@@ -24,6 +27,7 @@ public class Personne{
 		dateNaissance=laDate;
 		adresse=lAdresse;
 		nbPersonnes++;
+		nomDernierePersonneCree=leNom;
 	}
 	
 	/** 
@@ -56,6 +60,18 @@ public class Personne{
 	public String getPrenom(){
 		return prenom;
 	}
+	
+	public static String getNomDernierePersonneCree() {
+		return nomDernierePersonneCree;
+	}
+	
+	public static int getAgeMajorite() {
+		return AGE_MAJORITE;
+	}
+	
+	public int getAgeObtentionDernierDiplome() {
+		return ageObtentionDernierDiplome;
+	}
 	/**
 	 * Accesseur
 	 * @return retourne la date de naissance	 
@@ -74,7 +90,7 @@ public class Personne{
 	 * Modificateur
 	 * @param retourne l'adresse	 
 	 */
-	public int getNbPersonnes() {
+	public static int getNbPersonnes() {
 		return nbPersonnes;
 	}
 	
@@ -116,9 +132,9 @@ public class Personne{
 	
 	public boolean equals(Object obj) {
 		boolean res=false;
-		if(obj instanceof Personne) {
+		if(obj instanceof Personne && obj) {
 			Personne objPersonne=(Personne)obj;
-			res=(objPersonne.getNom()==this.nom && objPersonne.getPrenom()==this.prenom);
+			res=(objPersonne.getNom()==this.nom && objPersonne.getPrenom().equals(this.prenom));
 		}
 		return res;
 	}

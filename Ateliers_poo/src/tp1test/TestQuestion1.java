@@ -15,9 +15,9 @@ public class TestQuestion1 {
 		GregorianCalendar dateEmb=new GregorianCalendar(2019,3,2);
 		Adresse adresse=new Adresse(11,"av","20000","aj");
 		Personne p1=new Personne(nom,prenom,2,3,1990,11,"av","20000","aj");
-		Personne p2=new Personne(nom,prenom,2,3,90,11,"av","20000","aj");
-		//boolean res=p1.equals(p2);
-		//System.out.println(res);
+		Personne p2=new Personne(nom,prenom,2,3,1990,11,"av","20000","aj");
+		boolean res=p1.equals(p2);
+		System.out.println(res);
 		//System.out.println(p2.getNom());
 		//System.out.println(p1.getNom());
 		//System.out.println("p1 nom == p2 nom: "+(p1.getNom()==p2.getNom()));
