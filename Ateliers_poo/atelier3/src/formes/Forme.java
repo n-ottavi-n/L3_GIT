@@ -19,9 +19,5 @@ public abstract class Forme {
 	public String toString() {
 		return ID_FORME+" de surface: "+calcSurface();
 	}
-	
-	
-	
-	
 
 }
