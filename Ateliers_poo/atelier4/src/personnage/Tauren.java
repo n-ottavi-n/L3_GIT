@@ -13,7 +13,7 @@ public class Tauren extends Personnage {
 
 	@Override
 	public int positionSouhaite() {
-		return (int)(Math.random()*taille-1)+1;
+		return (getPosition())+(int)((Math.random()*taille-1)+1);
 	}
 	
 	public String toString() {

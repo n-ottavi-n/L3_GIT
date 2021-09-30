@@ -11,10 +11,15 @@ public abstract class Personnage {
 	public Personnage(String nom, int age) {
 		this.nom=nom;
 		this.age=age;
+		
 	}
 	
 	public int getPosition() {
 		return position;
+	}
+	
+	public void setProprietaire(Joueur p) {
+		this.proprietaire=p;
 	}
 	
 	public void deplacer(int destination, int gain) {

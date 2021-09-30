@@ -17,6 +17,10 @@ public class Case {
 		this(null,gain);
 	}
 	
+	public int getGain() {
+		return gain;
+	}
+	
 	public int getPenalite() {
 		int res=0;
 		if(obs!=null) {

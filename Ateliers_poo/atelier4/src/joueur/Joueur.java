@@ -30,6 +30,7 @@ public class Joueur {
 	
 	public void ajouterPersonnage(Personnage p) {
 		listePersos.add(p);
+		p.setProprietaire(this);
 	}
 	
 	public void modifierPoints(int nb) {

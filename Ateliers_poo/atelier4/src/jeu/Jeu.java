@@ -63,16 +63,41 @@ public class Jeu {
 	}
 	
 	public void lancerJeu() {
+		//initialisation
 		initialiserCases();
 		ArrayList<Personnage> persos=tousLesPersos();
 		int i=0;
 		for(Personnage p: persos) {
 			Case caseActuelle=cases.get(i);
-			while(!caseActuelle.sansObstacle()) {
+			while(!caseActuelle.estLibre()) { 
 				i++;
+				caseActuelle=cases.get(i);
 			}
 			cases.get(i).placerPersonnage(p);
+			i++;
 		}
+		afficherCases();
+		//mouvements
+		for(Personnage p: persos) {
+			System.out.println(p);
+			int posNext=p.positionSouhaite();
+			Case caseNext=cases.get(posNext);
+			if(caseNext.estLibre()) { //case destination vide:
+				cases.get(p.getPosition()).enleverPersonnage();
+				p.deplacer(posNext, caseNext.getGain());
+			}
+			else if(!caseNext.sansObstacle()) { //case destination a un obstacle
+				p.penaliser(caseNext.getPenalite());
+			}
+			else if(!caseNext.sansPerso()){
+				p.penaliser(caseNext.getGain());
+			}
+			else if(cases.indexOf(caseNext)>=NBCASES) {
+				caseNext=cases.get(NBCASES-1);
+				p.deplacer(NBCASES-1, caseNext.getGain());
+			}
+		}
+		
 	}
 	
 	public void afficherCases() {
@@ -106,7 +131,7 @@ public class Jeu {
 			scoreMax=max;//update scoreMax;
 
 		}
-		Joueur.resetNbJoueurs();
+		Joueur.resetNbJoueurs();		
 	}
 	
 	
