@@ -59,7 +59,7 @@ public class Case {
 			res="Libre (gain = "+gain+")";
 		}
 		else if(!sansObstacle()) {
-			res="Obstacle (penalite = "+(-gain)+")";
+			res="Obstacle (penalite = "+(-obs.getPenalite())+")";
 		}
 		else if(!sansPerso()) {
 			res=perso.toString()+" (penalite = "+(-gain)+")";

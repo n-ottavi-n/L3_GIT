@@ -56,6 +56,10 @@ public class Joueur {
 		return res;
 	}
 	
+	public void resetScore() {
+		nbPoints=0;
+	}
+	
 	public static void resetNbJoueurs() {
 		nbJoueurs=0;
 	}

@@ -34,10 +34,10 @@ public class Jeu {
 	
 	public ArrayList<Personnage> tousLesPersos(){
 		ArrayList<Personnage> res=new ArrayList();
-		for(Joueur j:listeJoueurs) {//boucle a travers les elements
-			ArrayList<Personnage> persos=j.getPersos();
+		for(Joueur j:listeJoueurs) {//boucle a travers les joueurs
+			ArrayList<Personnage> persos=j.getPersos(); //recupere tous les persos d'un joueur
 			if(persos!=null) {
-				res.addAll(persos);
+				res.addAll(persos); //les ajoute a la liste
 			}
 		}
 		return res;
@@ -74,30 +74,36 @@ public class Jeu {
 				caseActuelle=cases.get(i);
 			}
 			cases.get(i).placerPersonnage(p);
+			p.deplacer(i, 0);
+			
 			i++;
 		}
 		afficherCases();
 		//mouvements
-		for(Personnage p: persos) {
-			System.out.println(p);
-			int posNext=p.positionSouhaite();
-			Case caseNext=cases.get(posNext);
-			if(caseNext.estLibre()) { //case destination vide:
-				cases.get(p.getPosition()).enleverPersonnage();
-				p.deplacer(posNext, caseNext.getGain());
+		for(int j=0;j<=nbEtapes;j++) {
+			for(Personnage p: persos) {
+				int posNext=p.positionSouhaite();
+				if(posNext>=NBCASES) { //si depassement
+					posNext=NBCASES-1;
+				}
+				Case caseNext=cases.get(posNext);	//recupere la case ou on souhaite aller		
+				if(caseNext.estLibre()) { //case destination vide
+					int gain=caseNext.getGain();
+					cases.get(p.getPosition()).enleverPersonnage(); //retire le perso de sa case actuelle
+					p.deplacer(posNext, gain); //mets a jour la position et prend les gains
+					caseNext.placerPersonnage(p); //place le perso dans la nouvelle case
+				}
+				else if(!caseNext.sansObstacle()) { //case destination a un obstacle
+					p.penaliser(caseNext.getPenalite());
+				}
+				else if(!caseNext.sansPerso()){
+					p.penaliser(caseNext.getGain());
+				}
+				//afficherCases();
 			}
-			else if(!caseNext.sansObstacle()) { //case destination a un obstacle
-				p.penaliser(caseNext.getPenalite());
-			}
-			else if(!caseNext.sansPerso()){
-				p.penaliser(caseNext.getGain());
-			}
-			else if(cases.indexOf(caseNext)>=NBCASES) {
-				caseNext=cases.get(NBCASES-1);
-				p.deplacer(NBCASES-1, caseNext.getGain());
-			}
-		}
+			//afficherCases();
 		
+		}
 	}
 	
 	public void afficherCases() {
@@ -125,13 +131,16 @@ public class Jeu {
 				gagnant=j;//mise a jour du meilleur joueur
 			}
 		}
-		System.out.println("Le gagnat est "+gagnant.getNom()+" avec "+max+" points");
+		System.out.println("Le gagnant est "+gagnant.getNom()+" avec "+max+" points");
 		if(max>scoreMax) {
 			System.out.println("Record battu: Ancien score maximum "+scoreMax);
 			scoreMax=max;//update scoreMax;
 
 		}
-		Joueur.resetNbJoueurs();		
+		Joueur.resetNbJoueurs();	
+		for(Joueur j:listeJoueurs) {
+			j.resetScore();
+		}
 	}
 	
 	

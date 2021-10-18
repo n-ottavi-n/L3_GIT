@@ -5,8 +5,9 @@ import joueur.Joueur;
 public abstract class Personnage {
 	
 	private String nom;
-	private int age, position;
-	private Joueur proprietaire;
+	private int age;
+	private int position;
+	public Joueur proprietaire;
 	
 	public Personnage(String nom, int age) {
 		this.nom=nom;
@@ -18,13 +19,17 @@ public abstract class Personnage {
 		return position;
 	}
 	
+	public String getName() {
+		return nom;
+	}
+	
 	public void setProprietaire(Joueur p) {
 		this.proprietaire=p;
 	}
 	
 	public void deplacer(int destination, int gain) {
 		position=destination;
-		proprietaire.modifierPoints(gain);
+		proprietaire.modifierPoints(Math.abs(gain));
 	}
 	
 	public void penaliser(int penalite) {

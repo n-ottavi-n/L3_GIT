@@ -33,8 +33,8 @@ public class TestJeu {
 			atelierPoo.ajouterJoueur(lucien);
 			System.out.println("*******LANCER JEU*******");
 			atelierPoo.lancerJeu();
-			System.out.println("*****AFFICHER CASES*****");
-			atelierPoo.afficherCases();
+			//System.out.println("*****AFFICHER CASES*****");
+			//atelierPoo.afficherCases();
 			System.out.println("*****AFFICHER RESULTATS*****");
 			atelierPoo.afficherResultats();
 			
