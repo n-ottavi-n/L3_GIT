@@ -7,7 +7,7 @@ public class ConcreteStackList implements AStack{
 	public ArrayList<Object> elements;
 	
 	public ConcreteStackList() {
-		ArrayList<Object> elements=new ArrayList<Object>();
+		elements=new ArrayList<Object>();
 	}
 
 	@Override  //return true si la pile est vide

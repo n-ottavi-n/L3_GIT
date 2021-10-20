@@ -6,35 +6,36 @@ import java.util.List;
 public class ConcreteStackArray implements AStack{
 	
 	public Object[] elements;
-	private int taille;
-	int i=0;
+	private int tailleMax;
+	private int tailleActuelle=0;
 	
 	public ConcreteStackArray(int taille) {
-		this.taille=taille;
-		Object[] elements=new Object[taille];
+		tailleMax=taille;
+		elements=new Object[tailleMax];
 	}
 
 	@Override  //return true si la pile est vide
 	public boolean isEmpty() {
-		boolean res=false;
-		if(elements==null) {
-			res=true;
-		}
-		return res;
+		return tailleActuelle==0;
 	}
 
 	@Override
-	public void push(Object o) {
-			elements.
-			i++;
+	public void push(Object obj) {
+		if(tailleActuelle<tailleMax) {
+			elements[tailleActuelle]=obj;
+			tailleActuelle++;
+		}
+		else {
+			System.out.println("STACK OVERFLOW");
+		}
 	}
 		
 
 	@Override 
 	public Object peek() {
 		Object res=null;
-			if(!this.isEmpty()) {
-				res=elements[-1];
+		if(!this.isEmpty()) {
+			res=elements[tailleActuelle-1];
 			}		
 		return res;
 	}
@@ -43,7 +44,8 @@ public class ConcreteStackArray implements AStack{
 	public Object pop() {
 		Object res=this.peek();
 		if(res!=null) {			
-			elements[-1]=null;
+			elements[tailleActuelle-1]=null;
+			tailleActuelle--;
 		}
 		return res;
 	}
