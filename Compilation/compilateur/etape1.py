@@ -4,104 +4,6 @@ Created on Tue Oct 26 13:43:59 2021
 
 @author: notta
 """
-MEM=[0,1,2] #pile d'entiers
-SP=0 #pointeur de pile
-P_CODE=[] #tableau d'instructions
-PC=0 #pointeur d'instructions
-INST=""#instruction en cours
-end=False
-
-def add(pile):
-    res=pile[-1]+pile[-2]
-    del pile[-1]
-    pile[-1]=res
-    
-def sub(pile):
-    res=pile[-1]-pile[-2]
-    del pile[-1]
-    pile[-1]=res
-    
-def mul(pile):
-    res=pile[-1]*pile[-2]
-    del pile[-1]
-    pile[-1]=res
-    
-def div(pile):
-    res=pile[-1]//pile[-2]
-    del pile[-1]
-    pile[-1]=res
-    
-def eql(pile):
-    res=(pile[-1]==pile[-2])
-    del pile[-1]
-    pile[-1]=int(res)
-    
-def neq(pile):
-    res=(pile[-1]!=pile[-2])
-    del pile[-1]
-    pile[-1]=int(res)
-    
-def gtr(pile):
-    res=(pile[-1]>pile[-2])
-    del pile[-1]
-    pile[-1]=int(res)
-    
-def lss(pile):
-    res=(pile[-1]<pile[-2])
-    del pile[-1]
-    pile[-1]=int(res)
-    
-def geq(pile):
-    res=(pile[-1]>=pile[-2])
-    del pile[-1]
-    pile[-1]=int(res)
-    
-def leq(pile):
-    res=(pile[-1]<=pile[-2])
-    del pile[-1]
-    pile[-1]=int(res)
-    
-def prn(pile):
-    res=pile[-1]
-    del pile[-1]
-    print(res)
-    
-def inn(pile):
-    a=input()
-    adresse=pile[-1]
-    pile[adresse]=a
-    del pile[-1]
-    
-def int_c(SP,c):
-    SP+=c
-    
-def ldi(pile,v):
-    pile+=[v]
-    
-def lda(pile,a):
-    pile+=[a]
-    
-def ldv(pile):
-    adresse=pile[-1]
-    pile[-1]=pile[adresse]
-    
-def sto(pile):
-    adresse=pile[-2]
-    pile[adresse]=pile[-1]
-    del pile[-1]
-    del pile[-1]
-    
-def brn(i,PC):
-    global PC
-    PC=i
-    
-def bze(i,pile):
-    if pile[-1]==0:
-        brn(i)
-    del pile[-1]
-    
-def hlt(ps):
-    ps="END"
     
 MNEMONIQUES=["ADD","SUB","MUL","DIV","EQL","NEQ","GTR","LSS","GEQ",
              "LEQ","PRN","INN","INT","LDI","LDA","LDV","STO","BRN",
@@ -113,23 +15,83 @@ def interpreteur(PCODE):
     PC=0 #pointeur d'instructions
     PS="EXECUTION" #program status
     INST=""#instruction en cours
-    for i in range(len(PCODE)):
-        INST=PCODE[PC]        
-        PC+=1
-        switch (INST){
-            case "ADD": add(MEM);
-            }
-        
+    while PS!="END":
+        INST=PCODE[PC][0]     
+        OPERANDE=PCODE[PC][1]
+        print("PC: {},INST: {}".format(PC,INST))
+        print("OPERANDE: ",OPERANDE)
+        if PC<(len(PCODE)-1):
+            PC+=1
+        if INST=="ADD":
+            MEM[-2]=MEM[-1]+MEM[-2]
+            del MEM[-1]
+        elif INST=="SUB":
+            MEM[-2]=MEM[-2]-MEM[-1]
+            del MEM[-1]
+        elif INST=="MUL":
+            MEM[-2]=MEM[-1]*MEM[-2]
+            del MEM[-1]
+        elif INST=="DIV":
+            MEM[-2]=MEM[-2]+MEM[-1]
+            del MEM[-1]
+        elif INST=="EQL":
+            MEM[-2]=int(MEM[-1]==MEM[-2])
+            del MEM[-1]
+        elif INST=="NEQ":
+            MEM[-2]=int(MEM[-1]!=MEM[-2])
+            del MEM[-1]
+        elif INST=="GTR":
+            MEM[-2]=int(MEM[-2]>MEM[-1])
+            del MEM[-1]
+        elif INST=="LSS":
+            MEM[-2]=int(MEM[-2]<MEM[-1])
+            del MEM[-1]
+        elif INST=="GEQ":
+            MEM[-2]=int(MEM[-2]>=MEM[-1])
+            del MEM[-1]
+        elif INST=="LEQ":
+            MEM[-2]=int(MEM[-2]<=MEM[-1])
+            del MEM[-1]
+        elif INST=="PRN":
+            print("res=",MEM[-1])
+            del MEM[-1]
+        elif INST=="INN":
+            a=int(input("entrez une valeur: "))
+            adresse=MEM[-1]
+            MEM[adresse]=a
+            del MEM[-1]
+        elif INST=="INT": 
+            MEM+=[0]*OPERANDE
+            SP+=OPERANDE
+        elif INST=="LDI":
+            MEM+=[OPERANDE]
+        elif INST=="LDA":
+            MEM+=[OPERANDE]
+        elif INST=="LDV":
+            MEM[-1]=MEM[MEM[-1]]
+        elif INST=="STO":
+            MEM[MEM[-2]]=MEM[-1]
+            del MEM[-1]
+            del MEM[-1]
+        elif INST=="BRN":
+            PC=OPERANDE
+        elif INST=="BZE":
+            if(MEM[-1]==0):
+                PC=OPERANDE
+            del MEM[-1]
+        elif INST=="HLT":
+            PS="END"
+        print("MEM: {}".format(MEM))
             
         
+PCODE=[("INT",2),("LDA",0),("INN",False),("LDA",1),("LDA",0),("LDV",False),
+       ("LDA",1),("LDV",False),("ADD",False),("STO",False),("LDA",0),
+       ("LDV",False),("LDI",0),("EQL",False),("BZE",1),("LDA",1),("LDV",False),
+       ("PRN",False),("HLT",False)]
 
-    
-    
-    
-print(MEM)
-ldi(MEM,3)
-print(MEM)
-    
+interpreteur(PCODE)
+            
+
 
     
 
