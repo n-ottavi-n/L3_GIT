@@ -17,14 +17,24 @@ public class Mere implements Cloneable {
 		return unObjet;
 	}
 	
+	public void setI(int i) {
+		this.i=i;
+	}
+	
 	public void setObj(UneClasse obj) {
 		unObjet=obj;
 	}
 	
-	public Object clone() throws CloneNotSupportedException {
+	public Object clone(){
 		Mere m=null;
-		UneClasse uc=(UneClasse)super.clone();
-		m.setObj(uc);
+		try {
+			m = (Mere)super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		m.unObjet=(UneClasse)unObjet.clone();
+		m.i=i;
 		return m;
 	}
 
