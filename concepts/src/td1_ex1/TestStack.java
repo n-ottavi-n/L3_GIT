@@ -11,7 +11,6 @@ public class TestStack {
 		
 		System.out.println(csa1.isEmpty());
 
-		
 		csa1.push(a);
 		csa1.push(b);
 		csa1.push(c);
@@ -25,9 +24,21 @@ public class TestStack {
 		System.out.println(csa1.pop());
 
 
-
+		ConcreteStackList csa2=new ConcreteStackList();
 		
+		System.out.println(csa1.isEmpty());
+		
+		csa1.push(a);
+		csa1.push(b);
+		csa1.push(c);
 
+		System.out.println(csa1.peek());
+		
+		System.out.println(csa1.pop());
+		System.out.println(csa1.pop());
+		System.out.println(csa1.pop());
+		System.out.println(csa1.pop());
+		System.out.println(csa1.pop());
 
 	}
 

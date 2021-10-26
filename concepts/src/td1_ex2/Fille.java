@@ -8,8 +8,7 @@ public class Fille extends Mere{
 		unObjetSensible = unObjSens;
 	}
 	
-	public Object clone() {
-		System.out.println("Cloning not supported");
-		return null;
+	public Object clone()  throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
 	}
 }

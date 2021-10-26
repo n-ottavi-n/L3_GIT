@@ -35,9 +35,9 @@ public class ConcreteStackList implements AStack{
 
 	@Override 
 	public Object pop() {
-		Object res=this.peek();
-		if(res!=null) {			
-			elements.remove(-1);
+		Object res=null;
+		if(!this.isEmpty()) {			
+			res=elements.remove(-1);
 		}
 		return res;
 	}

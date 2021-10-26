@@ -9,8 +9,23 @@ public class Mere implements Cloneable {
 		i = unI; unObjet = unObj;
 	}
 	
+	public int getI() {
+		return i;
+	}
+	
+	public UneClasse getUnObjet() {
+		return unObjet;
+	}
+	
+	public void setObj(UneClasse obj) {
+		unObjet=obj;
+	}
+	
 	public Object clone() throws CloneNotSupportedException {
-		return super.clone();
+		Mere m=null;
+		UneClasse uc=(UneClasse)super.clone();
+		m.setObj(uc);
+		return m;
 	}
 
 

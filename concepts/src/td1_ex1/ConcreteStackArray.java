@@ -1,8 +1,5 @@
 package td1_ex1;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ConcreteStackArray implements AStack{
 	
 	public Object[] elements;
@@ -49,7 +46,5 @@ public class ConcreteStackArray implements AStack{
 		}
 		return res;
 	}
-	
-	
 	
 }
