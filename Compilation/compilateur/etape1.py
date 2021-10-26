@@ -18,8 +18,8 @@ def interpreteur(PCODE):
     while PS!="END":
         INST=PCODE[PC][0]     
         OPERANDE=PCODE[PC][1]
-        print("PC: {},INST: {}".format(PC,INST))
-        print("OPERANDE: ",OPERANDE)
+        #print("PC: {},INST: {}".format(PC,INST))
+        #print("OPERANDE: ",OPERANDE)
         if PC<(len(PCODE)-1):
             PC+=1
         if INST=="ADD":
@@ -53,7 +53,7 @@ def interpreteur(PCODE):
             MEM[-2]=int(MEM[-2]<=MEM[-1])
             del MEM[-1]
         elif INST=="PRN":
-            print("res=",MEM[-1])
+            print("res =",MEM[-1])
             del MEM[-1]
         elif INST=="INN":
             a=int(input("entrez une valeur: "))
@@ -81,7 +81,7 @@ def interpreteur(PCODE):
             del MEM[-1]
         elif INST=="HLT":
             PS="END"
-        print("MEM: {}".format(MEM))
+        #print("MEM: {}".format(MEM))
             
         
 PCODE=[("INT",2),("LDA",0),("INN",False),("LDA",1),("LDA",0),("LDV",False),
