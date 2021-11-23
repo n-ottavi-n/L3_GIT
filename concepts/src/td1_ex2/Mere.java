@@ -25,7 +25,7 @@ public class Mere implements Cloneable {
 		unObjet=obj;
 	}
 	
-	public Object clone(){
+	public Object clone() throws CloneNotSupportedException{
 		Mere m=null;
 		try {
 			m = (Mere)super.clone();
