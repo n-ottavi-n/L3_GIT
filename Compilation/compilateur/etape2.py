@@ -7,47 +7,49 @@ Created on Tue Oct 26 13:44:16 2021
 
 import re
 
-TOKENS=["program","ID",";","CONSTS","var","INSTS","begin","end"]
+TOKENS=["program","begin","end","read","write","if","while","(",")"]
 i=0 #indice du token actuel
-token=TOKENS[0]
-ID='[a-zA-Z]+[0-9]*'
+ID='[a-zA-Z][a-zA-Z_0-9]*'
 NUM='[0-9]+'
 
 PROGRAM=["program",'abc',';','var','A',',','B',';',
          'begin',
-         #'A',':=','0',';',
-         #'B',':=','0',';',
+         'A',':=','0',';',
+         'B',':=','0',';',
          'while','A','<>','0','do',
          'begin',
          'read','(','A',')',';',
          'B',':=','A','+','B',';',
-         'end',
-         'write','(','B',')',';',         
+         'end',';',
+         "write",'(','B',')',';', 
          'end','.']
+
+token=PROGRAM[0]
+
+length=len(PROGRAM)
 
 def next_token():
     global i,token
-    i+=1
-    token=PROGRAM[i]
+    if i<(len(PROGRAM)-1):
+        i+=1
+        token=PROGRAM[i]
     
     
 
-def erreur(token):
-    print("ERREUR ",token)
+def erreur(exp_token,given_token):
+    print("ERREUR ", "expected: ",exp_token, " given: ",given_token)
     
-def teste(token):
-    print('expected:',token,'given: ',PROGRAM[i])
- 
-    if token==PROGRAM[i] or re.match(token,PROGRAM[i]):
+def teste(test_token):
+    print('expected:',test_token,'given: ',token) 
+    if test_token==token or re.match(test_token,token):
         next_token()
         return 1
     else:
-        erreur(token)
+        erreur(test_token, token)
         next_token()
         
-def consts(token):
-    teste("const")
-   
+def consts():
+    teste("const")   
     while token==ID:
         teste(ID)
         teste("==")
@@ -63,60 +65,60 @@ def Vars():
         teste(ID)
     teste(";")
     
-def fact(token):
+def fact():
     if re.match(ID,token) or re.match(NUM, token):
         next_token()
     else:
         teste("(")
-        expr(token)
+        expr()
         teste(")")
     
-def term(token):
-    fact(token)
+def term():
+    fact()
     while token in ["*","/"]:
         next_token()
-        fact(token)
+        fact()
     
-def expr(token):
-    term(token)
-    print("expr_token: ",token)
+def expr():
+    #print("expr_token: ",token)
+    term()
     while token in ["+","-"]:
         next_token()
-        term(token)
+        term()
 
-def cond(token):
-    expr(token)
+def cond():
+    expr()
     if token in ["==","<>","<",">","<=",">="]:
         next_token()
-        expr(token)
+        expr()
     
-def affec(token):
+def affec():
     teste(ID)
     teste(":=")
-    expr(token)
+    expr()
 
-def si(token):
+def si():
     teste("if")
-    cond(token)
+    cond()
     teste("then")
-    inst(token)
+    inst()
 
-def tantQue(token):
+def tantQue():
     teste("while")
-    cond(token)
+    cond()
     teste("do")
-    inst(token)
+    inst()
 
-def ecrire(token):
+def ecrire():
     teste("write")
     teste("(")
-    expr(token)
+    expr()
     while token==",":
         next_token()
-        expr(token)
+        expr()
     teste(")")
 
-def lire(token):
+def lire():
     teste("read")
     teste("(")
     teste(ID)
@@ -125,46 +127,47 @@ def lire(token):
         teste(ID)
     teste(")")
 
-def insts(tokenA):
-    global token
+def insts():
     teste("begin")
-    inst(token)  
+    inst()  
     while token==";":
         next_token()
-        print("insts:",token)
-        inst(token)
+        #print("insts:",token)
+        inst()
     teste("end")
     
-def inst(token):
-    
+def inst():   
+    print("inst: ",token)
     if token=="if":
-        si(token)
+        si()
     elif token=="while":
-        tantQue(token)
+        tantQue()
     elif token=="begin":
-        insts(token)
+        insts()
     elif token=="write":
-        ecrire(token)
+        ecrire()
     elif token=="read":
-        lire(token)
-    elif re.match(ID,token):
-        affec(token)
+        lire()
+    elif re.match(ID,token) and token not in TOKENS:        
+        affec()
 
         
-def block(token):
+def block():
     if token=="const":
-        consts(token)
+        consts()
     elif token=="var":
         Vars()
-    insts(token)
+    insts()
     
-def program(TOKENS):
+def program():
     teste("program")
     teste(ID)
     teste(";")
-    block(token)
+    block()
+    if token != ".":
+        erreur(".",token)
     
-program(TOKENS)
+program()
 
 
 

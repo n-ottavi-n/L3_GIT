@@ -90,13 +90,5 @@ PCODE=[("INT",2),("LDA",0),("INN",False),("LDA",1),("LDA",0),("LDV",False),
        ("PRN",False),("HLT",False)]
 
 interpreteur(PCODE)
-            
-
-
-    
-
-
-
-
 
 
