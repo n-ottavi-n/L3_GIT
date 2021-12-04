@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct 26 13:44:16 2021
+Created on Tue Nov 30 15:39:25 2021
 
 @author: notta
 """
-
 import re
 
 TOKENS=["program","begin","end","read","write","if","while","(",")"]
@@ -26,6 +25,25 @@ PROGRAM=["program",'abc',';','var','A',',','B',';',
 
 token=PROGRAM[0]
 
+offset=0
+TABLESYM=[]
+
+def entrerSym(classe):
+    global TABLESYM,offset
+    TABLESYM+=[(PROGRAM[i-1],classe,offset)]
+    offset+=1
+    
+def chercherSym(sym):
+    global TABLESYM
+    res=False
+    for s in TABLESYM:
+        if s[0]==sym:
+            res=s
+    if res:
+        return res
+    else:
+        erreur_dec(sym)
+
 length=len(PROGRAM)
 
 def next_token():
@@ -35,23 +53,36 @@ def next_token():
         token=PROGRAM[i]
     
     
-
+def erreur_dec(sym):
+    print("variable {} not declared".format(sym))
+    
 def erreur(exp_token,given_token):
     print("ERREUR ", "expected: ",exp_token, " given: ",given_token)
     
 def teste(test_token):
-    print('expected:',test_token,'given: ',token) 
+    #print('expected:',test_token,'given: ',token) 
     if test_token==token or re.match(test_token,token):
         next_token()
         return 1
     else:
         erreur(test_token, token)
         next_token()
+        return 0
+        
+def test_et_entre(test_token, classe):
+    if teste(test_token)==1:
+        entrerSym(classe)
+        
+def test_et_cherche(test_token):
+    tok=token
+    if teste(test_token)==1:
+        chercherSym(tok)
+    
         
 def consts():
-    teste("const")   
+    teste("const")       
     while token==ID:
-        teste(ID)
+        test_et_entre(ID,"constant")
         teste("==")
         teste(NUM)
         teste(";")
@@ -59,14 +90,16 @@ def consts():
 
 def Vars():
     teste("var")
-    teste(ID)
+    test_et_entre(ID,'variable')
     while token==",":
         next_token()
-        teste(ID)
+        test_et_entre(ID,'variable')
     teste(";")
     
 def fact():
-    if re.match(ID,token) or re.match(NUM, token):
+    if re.match(ID,token):
+        test_et_cherche(ID)
+    elif re.match(NUM, token):
         next_token()
     else:
         teste("(")
@@ -93,7 +126,7 @@ def cond():
         expr()
     
 def affec():
-    teste(ID)
+    test_et_cherche(ID)
     teste(":=")
     expr()
 
@@ -121,7 +154,7 @@ def ecrire():
 def lire():
     teste("read")
     teste("(")
-    teste(ID)
+    test_et_cherche(ID)
     while token==",":
         next_token()
         teste(ID)
@@ -160,17 +193,10 @@ def block():
     
 def program():
     teste("program")
-    teste(ID)
+    test_et_entre(ID, 'program')
     teste(";")
     block()
     if token != ".":
         erreur(".",token)
     
 program()
-
-
-
-
-
-
-    
