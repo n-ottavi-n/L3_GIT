@@ -12,7 +12,7 @@ i=0 #indice du token actuel
 ID='[a-zA-Z][a-zA-Z_0-9]*'
 NUM='[0-9]+'
 
-PROGRAM=["program",'abc',';','var','A',',','B',';',
+PROGRAM=["program",'abc',';','const','C','=','10',';','var','A',',','B',';',
          'begin',
          'A',':=','0',';',
          'B',':=','0',';',
@@ -40,7 +40,7 @@ def erreur(exp_token,given_token):
     print("ERREUR ", "expected: ",exp_token, " given: ",given_token)
     
 def teste(test_token):
-    print('expected:',test_token,'given: ',token) 
+    #print('expected:',test_token,'given: ',token) 
     if test_token==token or re.match(test_token,token):
         next_token()
         return 1
@@ -50,9 +50,9 @@ def teste(test_token):
         
 def consts():
     teste("const")   
-    while token==ID:
+    while re.match(ID,token) and token!='var':
         teste(ID)
-        teste("==")
+        teste("=")
         teste(NUM)
         teste(";")
     
@@ -154,7 +154,7 @@ def inst():
 def block():
     if token=="const":
         consts()
-    elif token=="var":
+    if token=="var":
         Vars()
     insts()
     

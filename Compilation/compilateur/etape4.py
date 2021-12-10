@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Tue Dec  7 14:42:46 2021
+
+@author: notta
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Tue Nov 30 15:39:25 2021
 
 @author: notta
@@ -11,7 +18,7 @@ i=0 #indice du token actuel
 ID='[a-zA-Z][a-zA-Z_0-9]*'
 NUM='[0-9]+'
 
-PROGRAM=["program",'abc',';','const','C','=','10',';','D','=','8',';',
+PROGRAM=["program",'abc',';',
          'var','A',',','B',';',
          'begin',
          'A',':=','0',';',
@@ -28,6 +35,16 @@ token=PROGRAM[0]
 
 offset=0
 TABLESYM=[]
+
+def next_inst(compt):
+    return False
+
+def getAdresseFromTableSym(nomVar):
+    ADDR=0
+    for dec in TABLESYM:
+        if dec[0]==nomVar:
+            ADDR=dec[2]
+    return ADDR
 
 def entrerSym(classe,value):
     global TABLESYM,offset
@@ -101,26 +118,47 @@ def Vars():
     
 def fact():
     if re.match(ID,token):
+        nomVar=token
         test_et_cherche(ID)
+        for line in TABLESYM:
+            if line[1]=='constant':
+                generer2('LDI',TABLESYM.index(line))
+            if line[1]=='variable':
+                generer2('LDA',getAdresseFromTableSym(nomVar))
+                generer1('LDV')
     elif re.match(NUM, token):
+        generer2('LDI',token)
         next_token()
+        
     else:
         teste("(")
         expr()
         teste(")")
     
 def term():
+    global token
     fact()
     while token in ["*","/"]:
+        op=token
         next_token()
         fact()
+        if op=="*":
+            generer1('MUL')
+        else:
+            generer1('DIV')
     
 def expr():
+    global token
     #print("expr_token: ",token)
     term()
     while token in ["+","-"]:
+        op=token
         next_token()
         term()
+        if op=="+":
+            generer1('ADD')
+        else:
+            generer1("SUB")
 
 def cond():
     expr()
@@ -129,14 +167,20 @@ def cond():
         expr()
     
 def affec():
+    global token,PLACESYM
+    #recherche de l'adresse de la variable
+    ADDR=getAdresseFromTableSym(token)
     test_et_cherche(ID)
+    generer2('LDA', ADDR)
     teste(":=")
     expr()
+    generer1('STO')
 
 def si():
     teste("if")
     cond()
     teste("then")
+    generer2('BZE',0)
     inst()
 
 def tantQue():
@@ -149,18 +193,26 @@ def ecrire():
     teste("write")
     teste("(")
     expr()
+    generer1('PRN')
     while token==",":
         next_token()
         expr()
+        generer1('PRN')
     teste(")")
 
 def lire():
     teste("read")
     teste("(")
+    nomVar=token
     test_et_cherche(ID)
+    generer2('LDA',getAdresseFromTableSym(nomVar))
+    generer1('INN')
     while token==",":
         next_token()
+        nomVar=token
         teste(ID)
+        generer2('LDA',getAdresseFromTableSym(nomVar))
+        generer1('INN')
     teste(")")
 
 def insts():
@@ -168,7 +220,6 @@ def insts():
     inst()  
     while token==";":
         next_token()
-        #print("insts:",token)
         inst()
     teste("end")
     
@@ -188,10 +239,12 @@ def inst():
 
         
 def block():
+    global offset
     if token=="const":
         consts()
     if token=="var":
         Vars()
+    generer2('INT', offset)
     insts()
     
 def program():
@@ -199,7 +252,28 @@ def program():
     test_et_entre(ID, 'program')
     teste(";")
     block()
+    generer1('HLT')
     if token != ".":
         erreur(".",token)
     
+PCODE=[0]*50
+PC=0
+        
+def generer1(m):
+    global PCODE,PC
+    if PC==len(PROGRAM):
+        print('Error len')
+    PCODE[PC]=m
+    PC+=1
+    
+def generer2(m,a):
+    global PCODE,PC
+    if PC==len(PROGRAM):
+        print('Error len')
+    PCODE[PC]=(m,a)
+    PC+=1
+    
+    
 program()
+
+print(PCODE)
